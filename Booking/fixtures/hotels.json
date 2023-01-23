@@ -1,0 +1,38 @@
+[
+	{
+		"model": "Hotel.Hotel",
+		"pk": 1,
+		"fields": {
+			"uid": 1,
+			"hotel_name": "Taj Hotel",
+			"hotel_price": "8000",
+			"description": "Taj Hotel by Tata",
+			"amenities": [1],
+			"room_count": "200"
+		}
+	},
+	{
+		"model": "Hotel.Hotel",
+		"pk": 2,
+		"fields": {
+			"uid": 2,
+			"hotel_name": "Hotel Decent",
+			"hotel_price": "2000",
+			"description": "Jab We Met Hotel",
+			"amenities": [1, 2],
+			"room_count": "20"
+		}
+	},
+	{
+		"model": "Hotel.Hotel",
+		"pk": 3,
+		"fields": {
+			"uid": 3,
+			"hotel_name": "ITC Morya",
+			"hotel_price": "12000",
+			"description": "Hotels by ITC",
+			"amenities": [1, 2, 5],
+			"room_count": "200"
+		}
+	}
+]

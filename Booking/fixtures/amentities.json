@@ -1,0 +1,58 @@
+[
+	{
+		"model": "Hotel.Amenities",
+		"pk": 1,
+		"fields": {
+			"uid": 1,
+			"amenity_name": "Water Park"
+		}
+	},
+	{
+		"model": "Hotel.Amenities",
+		"pk": 2,
+		"fields": {
+			"uid": 2,
+			"amenity_name": "Swimming Pool"
+		}
+	},
+	{
+		"model": "Hotel.Amenities",
+		"pk": 3,
+		"fields": {
+			"uid": 3,
+			"amenity_name": "Balcony"
+		}
+	},
+	{
+		"model": "Hotel.Amenities",
+		"pk": 4,
+		"fields": {
+			"uid": 4,
+			"amenity_name": "Luxury Rooms"
+		}
+	},
+	{
+		"model": "Hotel.Amenities",
+		"pk": 5,
+		"fields": {
+			"uid": 5,
+			"amenity_name": "Breakfast"
+		}
+	},
+	{
+		"model": "Hotel.Amenities",
+		"pk": 6,
+		"fields": {
+			"uid": 6,
+			"amenity_name": "Sun Set View"
+		}
+	},
+	{
+		"model": "Hotel.Amenities",
+		"pk": 7,
+		"fields": {
+			"uid": 7,
+			"amenity_name": "Jacuizzi"
+		}
+	}
+]
