@@ -38,7 +38,9 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'django.contrib.sites',
+    
     'Hotel', #Custom App
+    
     'crispy_forms',
 	# Django-allauth apps
     'allauth',
@@ -76,7 +78,7 @@ ROOT_URLCONF = 'Booking.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [BASE_DIR / 'templates'],
+        'DIRS':[],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -149,16 +151,13 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.1/howto/static-files/
 
-STATIC_URL = 'static/'
-STATIC_ROOT = 'staticfiles'
+STATIC_URL = '/static/'
 
-STATIC_ROOT = os.path.join(BASE_DIR,'staticfiles')
+STATIC_DIR = os.path.join(BASE_DIR , "static")
 
-STATICFILES_DIR = {
-    os.path.join(BASE_DIR , "hotels/static")
-}
+STATICFILES_DIRS = [STATIC_DIR]
 
-MEDIA_ROOT =  os.path.join(BASE_DIR, 'public/static') 
+MEDIA_ROOT =  os.path.join(BASE_DIR, 'static') 
 MEDIA_URL = '/media/'
 
 # Default primary key field type

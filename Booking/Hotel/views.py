@@ -45,7 +45,7 @@ def home(request):
 
     context = {'amenities_objs' : amenities_objs , 'hotels_objs' : hotels_objs , 'sort_by' : sort_by 
     , 'search' : search , 'amenities' : amenities}
-    return render(request , 'home.html' ,context)
+    return render(request , 'Hotel/home.html' ,context)
 
 def hotel_detail(request,uid):
     hotel_obj = Hotel.objects.get(uid = uid)
