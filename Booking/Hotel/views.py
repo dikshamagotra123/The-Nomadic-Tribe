@@ -6,8 +6,6 @@ from django.http import HttpResponseRedirect, JsonResponse
 from .models import (Amenities, Hotel, HotelBooking)
 from django.db.models import Q
 
-
-
 def check_booking(start_date  , end_date ,uid , room_count):
     qs = HotelBooking.objects.filter(
         start_date__lte=start_date,
@@ -43,7 +41,7 @@ def home(request):
     if len(amenities):
         hotels_objs = hotels_objs.filter(amenities__amenity_name__in = amenities).distinct()
 
-
+    print(f"{hotels_objs=}")
 
     context = {'amenities_objs' : amenities_objs , 'hotels_objs' : hotels_objs , 'sort_by' : sort_by 
     , 'search' : search , 'amenities' : amenities}
