@@ -63,9 +63,6 @@ def hotel_detail(request,uid):
         
         messages.success(request, 'Your booking has been saved')
         return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
-        
-
-        
     
     return render(request , 'hotel_detail.html' ,{
         'hotels_obj' :hotel_obj
@@ -92,7 +89,7 @@ def login_page(request):
 
         
         return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
-    return render(request ,'login.html')
+    return render(request ,'Hotel/login.html')
 
 def register_page(request):
     if request.method == 'POST':
@@ -110,4 +107,4 @@ def register_page(request):
         user.save()
         return redirect('/')
 
-    return render(request , 'register.html')
+    return render(request , 'Hotel/register.html')

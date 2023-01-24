@@ -78,7 +78,7 @@ ROOT_URLCONF = 'Booking.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS':[],
+        'DIRS':[BASE_DIR / 'templates'],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -100,8 +100,8 @@ AUTHENTICATION_BACKENDS = [
 	  'allauth.account.auth_backends.AuthenticationBackend',
     ]
 
-LOGIN_REDIRECT_URL = 'homepage'
-LOGOUT_REDIRECT_URL = 'homepage'
+LOGIN_REDIRECT_URL = 'home'
+LOGOUT_REDIRECT_URL = 'home'
 
 WSGI_APPLICATION = 'Booking.wsgi.application'
 CRISPY_TEMPLATE_PACK = 'bootstrap4'

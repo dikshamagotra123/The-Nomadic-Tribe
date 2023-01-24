@@ -5,7 +5,7 @@
 
 	<p>{% trans 'Are you sure you want to sign out?' %}</p>
 
-	<form method="post" action="{% url 'home' %}">
+	<form method="post" action="{% url 'login_page' %}">
 		{% csrf_token %} {% if redirect_field_value %}
 		<input
 			type="hidden"
