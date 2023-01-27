@@ -4,47 +4,7 @@
 
 {% load static %}
 
-<!-- jumbotron and nav -->
-<section class="colorful jumbotron mb-0" role="banner">
-    <nav class="navbar navbar-expand-lg justify-content-between navbar-dark" role="navigation">
-        <!-- <div class="navbar-brand">
-        </div> -->
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false"
-            aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-       
-    </nav>
-</section>
-<section class="search-container mb-5 pb-5">
-    <div class="container carousel-container">
-        <div id="carouselExampleSlidesOnly" class="carousel slide" data-bs-ride="carousel">
-            <div class="carousel-inner">
-              <div class="carousel-item active">
-                <img src='{% static "images/img1.webp" %}' class="d-block w-100" alt="...">
-              </div>
-              <div class="carousel-item">
-                <img src='{% static "images/img2.jpg" %}' class="d-block w-100" alt="...">
-              </div>
-              <div class="carousel-item">
-                <img src='{% static "images/img3.jpg" %}' class="d-block w-100" alt="...">
-              </div>
-              <div class="carousel-item">
-                <img src='{% static "images/img4.jpg" %}' class="d-block w-100" alt="...">
-              </div>
-            </div>
-          </div>
-        <!-- <div class="row mt-2 justify-content-between">
-            <div class="col-md-8 text-white align-self-center mb-2 p-4">
-                <h1>The Nomadic Tribe</h1>
-                <span class=""> Lorem ipsum dolor, sit amet consectetur adipisicing elit. Harum debitis perspiciatis sed iusto eveniet neque natus quidem velit optio cumque saepe repudiandae vero, sit hic adipisci laudantium libero blanditiis animi.
-                </span>
-            </div>
-           
-        </div> -->
-    </div>
-</section>
-<section class="search-container mb-5 pb-5">
+<section class="search-container">
     <div class="container">
         <div class="row">
             <div class="col-lg-3">
@@ -104,7 +64,7 @@
                     <div class="col-md-4">
                         <div class="form-inline">
                            <label class="" for="exampleFormControlSelect1">Amenities</label>
-                            <select name="amenities" class="form-control" multiple>
+                            <select name="amenities" class="form-control" >
                                 <option value="">Choose</option>
                                 {% for amenities_obj in amenities_objs %}
                                 <option {% if amenities_obj.amenity_name in amenities  %} selected {%endif%} value="{{amenities_obj.amenity_name}}"> {{amenities_obj.amenity_name}} </option>

@@ -64,7 +64,7 @@ def hotel_detail(request,uid):
         messages.success(request, 'Your booking has been saved')
         return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
     
-    return render(request , 'hotel_detail.html' ,{
+    return render(request , 'Hotel/hotel_detail.html' ,{
         'hotels_obj' :hotel_obj
     })
 
