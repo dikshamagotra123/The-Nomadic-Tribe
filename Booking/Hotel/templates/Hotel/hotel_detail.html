@@ -1,50 +1,38 @@
-{% extends "base.html" %} {% block start %}
+{% extends "Hotel/base.html" %} {% block start %}
 
-<div class="container mt-5 pt-5">
+<div class="container mt-5 fade-in">
 	<div class="row search-card-result">
 		<div class="col-md-3">
-			<a href="/hotel-detail/{{hotels_obj.uid}}">
 				<img
 					class="img-fluid"
 					src="/media/{{hotels_obj.images.first.images}}"
 					alt="Card image cap"
 				/>
-			</a>
 		</div>
 
-		<div class="col-md-5">
+		<div class="col-md-5 mt-3">
 			<h5>{{hotels_obj.hotel_name}}</h5>
 
 			<p>{{hotels_obj.description|truncatechars:150}}</p>
 			<p>
 				{%for amenitie in hotels_obj.amenities.all %}
-				<b>{{amenitie.amenity_name}}</b>, {% endfor %}
+				<b>{{amenitie.amenity_name}}</b> {% endfor %}
 			</p>
 		</div>
-		<div class="col-md-2 border-left text-center more-offers">
+		<div class="col-md-2 border-left text-center more-offers mt-3">
 			<p>Place.com</p>
 			<p>${{hotels_obj.hotel_price}}</p>
 			<p>Room count</p>
 			<p>{{hotels_obj.room_count}}</p>
 		</div>
-		<div class="col-md-2 border-left text-center more-offers">
+		<!-- <div class="col-md-2 border-left text-center more-offers mt-5">
 			<div class="btn btn-success">View deal</div>
-		</div>
-	</div>
-	<div class="row">
-		{% for image in hotels_obj.images.all %}
-		<div class="col-md-3">
-			<img
-				src="/media/{{image.images}}"
-				style="height: 150px; width: 150px"
-			/>
-		</div>
-		{% endfor %}
+		</div> -->
 	</div>
 	{% if request.user.is_authenticated %}
-	<div class="filter-card">
+	<div class="filter-card mb-3">
 		<h5>Book Hotel</h5>
-		{%include "messages.html"%}
+		{%include "Hotel/messages.html"%}
 		<form method="post">
 			{% csrf_token %}
 			<div class="row form-group">
