@@ -3,7 +3,7 @@ from django.contrib.auth.models import User
 from django.contrib.auth import authenticate , login
 from django.contrib import messages
 from django.http import HttpResponseRedirect, JsonResponse
-from .models import (Amenities, Hotel, HotelBooking)
+from .models import (Adventures, Hotel, HotelBooking)
 from django.db.models import Q
 
 def check_booking(start_date  , end_date ,uid , room_count):
@@ -19,13 +19,13 @@ def check_booking(start_date  , end_date ,uid , room_count):
     return True
     
 def home(request):
-    amenities_objs = Amenities.objects.all()
+    adventure_objs = Adventures.objects.all()
     hotels_objs = Hotel.objects.all()
 
     sort_by = request.GET.get('sort_by')
     search = request.GET.get('search')
-    amenities = request.GET.getlist('amenities')
-    print(amenities)
+    adventures = request.GET.getlist('adventures')
+    print(adventures)
     if sort_by:
         if sort_by == 'ASC':
             hotels_objs = hotels_objs.order_by('hotel_price')
@@ -38,13 +38,13 @@ def home(request):
             Q(description__icontains = search) )
 
 
-    if len(amenities):
-        hotels_objs = hotels_objs.filter(amenities__amenity_name__in = amenities).distinct()
+    if len(adventures):
+        hotels_objs = hotels_objs.filter(amenities__amenity_name__in = adventures).distinct()
 
     print(f"{hotels_objs=}")
 
-    context = {'amenities_objs' : amenities_objs , 'hotels_objs' : hotels_objs , 'sort_by' : sort_by 
-    , 'search' : search , 'amenities' : amenities}
+    context = {'adventure_objs' : adventure_objs , 'hotels_objs' : hotels_objs , 'sort_by' : sort_by 
+    , 'search' : search , 'adventures' : adventures}
     return render(request , 'Hotel/home.html' ,context)
 
 def hotel_detail(request,uid):
