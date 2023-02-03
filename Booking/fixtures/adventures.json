@@ -1,0 +1,58 @@
+[
+	{
+		"model": "Hotel.Adventures",
+		"pk": 1,
+		"fields": {
+			"uid": 1,
+			"adventure_name": "Adv 1"
+		}
+	},
+	{
+		"model": "Hotel.Adventures",
+		"pk": 2,
+		"fields": {
+			"uid": 2,
+			"adventure_name": "Adv 2"
+		}
+	},
+	{
+		"model": "Hotel.Adventures",
+		"pk": 3,
+		"fields": {
+			"uid": 3,
+			"adventure_name": "Adv 3"
+		}
+	},
+	{
+		"model": "Hotel.Adventures",
+		"pk": 4,
+		"fields": {
+			"uid": 4,
+			"adventure_name": "Adv 4"
+		}
+	},
+	{
+		"model": "Hotel.Adventures",
+		"pk": 5,
+		"fields": {
+			"uid": 5,
+			"adventure_name": "Adv 5"
+		}
+	},
+	{
+		"model": "Hotel.Adventures",
+		"pk": 6,
+		"fields": {
+			"uid": 6,
+			"adventure_name": "Adv 6"
+		}
+	},
+	{
+		"model": "Hotel.Adventures",
+		"pk": 7,
+		"fields": {
+			"uid": 7,
+			"adventure_name": "Adv 7"
+		}
+	}
+]
