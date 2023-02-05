@@ -8,21 +8,33 @@ from django.db.models import Q
 
 def check_booking(start_date  , end_date ,uid_list , hotels):
     print(f"{uid_list=}")
+    booked_hotels_list = []
+    
     for uid in uid_list:
-        hotel_bookings = HotelBooking.objects.filter(
+        booked_hotel = HotelBooking.objects.filter(
             start_date__lte=start_date,
             end_date__gte=end_date,
             hotel__uid = uid
             )
-        print(f"{hotel_bookings=}")
-        hotel_room_dict={}
-        for hotel in hotels:
-            hotel_room_dict[hotel.hotel_name] = hotel.room_count
+        
+        if booked_hotel:    
+            for obj in booked_hotel:
+                booked_hotels_list.append(obj.hotel)
+    print(f"\n{booked_hotels_list=}\n")
+        
+    hotel_room_dict={}
+    available_hotels_list = []    
 
-        if len(hotel_bookings) >= hotel.room_count:
-            return False
-    print(f"{hotel_room_dict=}")        
-    return True
+    for hotel in hotels:
+        hotel_room_dict[hotel.hotel_name] = hotel.room_count
+        if hotel not in booked_hotels_list:
+            available_hotels_list.append(hotel)
+    
+        
+    print(f"\n{available_hotels_list=}\n")
+    print(f"{hotel_room_dict=}")   
+
+    return available_hotels_list ,booked_hotels_list
     
 def home(request):
     adventure_objs = Adventures.objects.all()
@@ -36,10 +48,11 @@ def home(request):
     alread_booked = None
 
     if checkin or checkout:
-        if not check_booking(checkin, checkout, hotel_uids, hotels_objs):
+        available_hotels_list ,booked_hotels_list = check_booking(checkin, checkout, hotel_uids, hotels_objs)
+        if len(available_hotels_list) == 0:
             messages.warning(request, 'Some hotels are booked on these days')
-            alread_booked = True
-
+        else:
+            hotels_objs = available_hotels_list
 
     if sort_by:
         if sort_by == 'ASC':
@@ -64,21 +77,26 @@ def home(request):
 
 def hotel_detail(request,uid):
     hotel_obj = Hotel.objects.all()
-    print(f"{hotel_obj.room_count=}")
     if request.method == 'POST':
         checkin = request.POST.get('checkin')
         checkout= request.POST.get('checkout')
         hotel = Hotel.objects.get(uid=uid)
         uid_list = []
         uid_list.append(uid)
-        if not check_booking(checkin ,checkout  , uid_list , hotel_obj):
-            messages.warning(request, 'Hotel is already booked in these dates ')
-            return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
 
-        HotelBooking.objects.create(hotel=hotel , user = request.user , start_date=checkin
-        , end_date = checkout , booking_type  = 'Pre Paid')
+        available_hotels_list ,booked_hotels_list = check_booking(checkin, checkout, uid_list, hotel_obj)
+        if len(booked_hotels_list) > 0:
+            messages.warning(request, 'Hotel is already booked on these dates ')
+            return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
+        else:
+            HotelBooking.objects.create(hotel=available_hotels_list[0] , user = request.user , start_date=checkin, end_date = checkout , booking_type  = 'Pre Paid')
         
         messages.success(request, 'Your booking has been saved')
+        # if not check_booking(checkin ,checkout  , uid_list , hotel_obj):
+        #     messages.warning(request, 'Hotel is already booked in these dates ')
+        #     return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
+
+        
         return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
     
     return render(request , 'Hotel/hotel_detail.html' ,{
