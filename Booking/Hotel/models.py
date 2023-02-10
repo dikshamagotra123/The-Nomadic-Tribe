@@ -52,8 +52,12 @@ class HotelBooking(models.Model):
     user = models.ForeignKey(User, related_name="user_bookings" , on_delete=models.CASCADE)
     start_date = models.DateField()
     end_date = models.DateField()
+    room_count = models.IntegerField(default=1)
     booking_type= models.CharField(max_length=100,choices=(('Pre Paid' , 'Pre Paid') , ('Post Paid' , 'Post Paid')))
 
     def __str__(self) -> str:
         return self.hotel.hotel_name
+    
+
+
     

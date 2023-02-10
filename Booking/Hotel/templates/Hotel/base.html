@@ -321,7 +321,7 @@
 		}
 
 		.search-container {
-			background-color: rgba(var(--bs-dark-rgb), var(--bs-bg-opacity)) !important;
+			background: linear-gradient(to right, #22c1c3, #fdbb2d);
 		}
 
 		.carousel-container .carousel-inner img {
@@ -508,7 +508,7 @@
 
 		.body-bg {
 			--bs-bg-opacity: 1;
-			background-color: rgba(var(--bs-dark-rgb), var(--bs-bg-opacity));
+			background: linear-gradient(to right, #22c1c3, #fdbb2d);
 		}
 
 		.fade-in {
@@ -577,7 +577,7 @@
 			-webkit-align-items: center;
 			height: 500px;
 			background: rgb(9,9,121);
-			background: linear-gradient(90deg, rgba(9,9,121,1) 27%, rgba(2,0,36,1) 55%, rgba(0,212,255,1) 84%);
+			background: linear-gradient(90deg, rgba(159,120,37,1) 21%, rgba(71,94,22,1) 51%, rgba(47,106,112,1) 73%);
 			overflow: hidden;
 		}
 
@@ -592,7 +592,7 @@
 			height: 100%;
 			width: 100%;
 			position: relative;
-			border: 3px solid #6495f2;
+			border: 3px solid rgb(34,193,195);;
 			border-radius: 50%;
 			display: flex;
 			display: -webkit-flex;
@@ -615,10 +615,10 @@
 			-webkit-align-items: center;
 			justify-content: center;
 			-webkit-justify-content: center;
-			background-image: linear-gradient(180deg, #4967e6 0%, #627bf4 100%);
-			-webkit-background-image: linear-gradient(180deg, #4967e6 0%, #627bf4 100%);
-			box-shadow: 0 2px 4px 0 #3e5ada;
-			-webkit-box-shadow: 0 2px 4px 0 #3e5ada;
+			background-image: linear-gradient(0deg, rgba(80,192,164,1) 21%, rgba(108,191,144,1) 34%, rgba(253,187,45,1) 100%);
+			-webkit-background-image: linear-gradient(0deg, rgba(80,192,164,1) 21%, rgba(108,191,144,1) 34%, rgba(253,187,45,1) 100%);
+			box-shadow: 0 2px 4px 0 rgba(108,191,144,1);
+			-webkit-box-shadow: 0 2px 4px 0 rgba(108,191,144,1);
 		}
 
 		.icon-block img {
@@ -667,7 +667,7 @@
 			-webkit-transform: translate(-50%, -50%) rotate(45deg);
 			width: 75%;
 			height: 75%;
-			border: 3px solid #6495f2;
+			border: 3px solid rgb(207,166,79);
 			border-radius: 50%;
 		}
 
@@ -688,6 +688,22 @@
 
 		.center-logo img {
 			max-width: 200px;
+		}
+
+		.find-btn {
+			width: 45%;
+		}
+		.filter-bg {
+			box-shadow: 0px 1px 4px rgba(41, 51, 57, 0.5);
+			margin: 2rem 0;
+			padding: 1rem 1rem;
+			background-color: #fff;
+			border-radius: 7px;
+		}
+
+		.btn-align {
+			display: flex;
+			justify-content: end;
 		}
 
 		/* keyframe animation */
@@ -797,6 +813,52 @@
 			}
 
 		}
+		.typing-demo {
+			width: 22ch;
+			animation: typing 2s steps(22), blink .5s step-end infinite alternate;
+			/* white-space: nowrap; */
+			overflow: hidden;
+			border-right: 3px solid;
+			font-family: monospace;
+			/* font-size: 2em; */
+		}
+
+		@keyframes typing {
+		from {
+			width: 0
+		}
+		}
+			
+		@keyframes blink {
+		50% {
+			border-color: transparent
+		}
+		}
+		.text-style {
+			font-size: 16px;
+			font-family: 'Times New Roman', Times, serif;
+			display: flex;
+			color: #f0fcff;
+			background: linear-gradient(to right, #2098ae, #0c5162);
+			border-radius: 14px;
+			/* -webkit-background-clip: text;
+			-webkit-text-fill-color: transparent; */
+			justify-content: center;
+			width: 100%;
+			text-align: inherit;
+			padding-top: 4%;
+			margin-right: 2%;
+		}
+		.text-style p {
+			font-size: 16px;
+			font-family: 'Times New Roman', Times, serif;
+			color: #fff;
+		}
+		.details-page {
+			display: flex;
+			align-items: flex-end;
+			justify-content: space-between;
+		}
 	</style>
 </head>
 
@@ -864,7 +926,7 @@
 				</div>
 			</div>
 			<div class="center-logo">
-				<h1 class="title-sec">The Nomadic Tribe</h1> 
+				<h1 class="title-sec typing-demo">The Nomadic Tribe</h1> 
 			</div>
 		</div>
 	</section>
