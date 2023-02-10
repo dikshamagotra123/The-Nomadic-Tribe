@@ -83,7 +83,7 @@ def hotel_detail(request,uid):
     if request.method == 'POST':
         checkin = request.POST.get('checkin')
         checkout= request.POST.get('checkout')
-        # rooms = request.POST.get('checkout')
+        # rooms = request.POST.get('rooms')
         rooms = 3
         hotel = Hotel.objects.filter(uid=uid)
         print(f"{hotel[0].room_count=}")
