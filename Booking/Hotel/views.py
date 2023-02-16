@@ -83,22 +83,25 @@ def home(request):
     return render(request , 'Hotel/home.html' ,context)
 
 def hotel_detail(request,uid):
-    hotel_objs = Hotel.objects.filter(uid=uid)
+    hotel_booking_objs = HotelBooking.objects.filter(hotel__uid=uid)
     if request.method == 'POST':
+        user = request.user.id
         checkin = request.POST.get('checkin')
         checkout= request.POST.get('checkout')
         rooms = request.POST.get('rooms')
-        # rooms = 3 
+        print(f"{checkout=}")
         hotel = Hotel.objects.all()
         print(f"{hotel[0].room_count=}")
 
+        hotel_booking_obj = HotelBooking.objects.get(hotel__uid=uid, start_date=checkin,end_date=checkout,user=user)
+        
         available_hotels_list ,booked_hotels_list = check_booking(checkin, checkout, hotel)
         
 
         if len(booked_hotels_list) > 0:
             messages.warning(request, 'Hotel is already booked on these dates ')
             return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
-        elif hotel[0].room_count < rooms:
+        elif hotel_booking_obj.rooms_left < int(rooms):
             messages.warning(request, 'There are not enough rooms available in this hotel')
             return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
         else:
@@ -107,7 +110,7 @@ def hotel_detail(request,uid):
             return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
     
     return render(request , 'Hotel/hotel_detail.html' ,{
-        'hotel_objs' :hotel_objs
+        'hotel_booking_objs':hotel_booking_objs,
     })
 
 def login_page(request):

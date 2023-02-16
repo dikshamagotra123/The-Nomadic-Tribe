@@ -2,32 +2,32 @@
 
 <section class="search-container mt-3">
 	<div class="container">
-		{% for hotel_obj in hotel_objs %}
+		{% for hotel_booking_obj in hotel_booking_objs|slice:":1" %}
 		<div class="row mt-5 fade-in">
 			<div class="col-sm-4 search-card-result">
 				<div class="col-md-5 img-center">
 					<img
 						class="img-fluid"
-						src="/media/{{hotel_obj.images.first.images}}"
+						src="/media/{{hotel_booking_obj.hotel.images.first.images}}"
 						alt="Card image cap"
 					/>
 				</div>
 
 				<div class="col-md-5 text-center mt-3 img-center">
-					<h5>{{hotel_obj.hotel_name}}</h5>
+					<h5>{{hotel_booking_obj.hotel.hotel_name}}</h5>
 
-					<p>{{hotel_obj.description|truncatechars:150}}</p>
+					<p>{{hotel_booking_obj.hotel.description|truncatechars:150}}</p>
 					<p>
-						{%for amenitie in hotel_obj.amenities.all %}
+						{%for amenitie in hotel_booking_obj.hotel.amenities.all %}
 						<b>{{amenitie.amenity_name}}</b> {% endfor %}
 					</p>
 				</div>
 				<div
 					class="col-md-2 border-left text-center more-offers mt-3 img-center"
 				>
-					<p>{{hotel_obj.review}}</p>
-					<p>${{hotel_obj.hotel_price}}</p>
-					<p>{{hotel_obj.room_count}}</p>
+					<p>{{hotel_booking_obj.hotel.review}}</p>
+					<p>${{hotel_booking_obj.hotel.hotel_price}}</p>
+					<p>{{hotel_booking_obj.hotel.room_count}}</p>
 				</div>
 				<!-- <div class="col-md-2 border-left text-center more-offers mt-5">
 			<div class="btn btn-success">View deal</div>
@@ -68,9 +68,9 @@
 								<input
 									type="number"
 									id="quantity"
-									name="quantity"
+									name="rooms"
 									min="1"
-									max="{{hotel_obj.room_count}}"
+									max="{{hotel_booking_obj.hotel.room_count}}"
 								/>
 							</p>
 						</div>
@@ -96,6 +96,7 @@
 			{% endif %}
 		</div>
 		{% endfor %}
+
 	</div>
 </section>
 
