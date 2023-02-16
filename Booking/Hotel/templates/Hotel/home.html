@@ -78,14 +78,9 @@
                 
                 {% for hotels_obj in hotels_objs %}
                 <div class="row search-card-result">
-                                    
-                    <div class="col-md-3">
-                       
-                    
+                    <div class="col-md-3">    
                         <img class="img-fluid" src="/media/{{hotels_obj.images.first.images}}" alt="Card image cap">
-                    
                     </div>
-               
                     <div class="col-md-3">
                         <h5>{{hotels_obj.hotel_name}}</h5>
                         
@@ -100,20 +95,18 @@
                         
                     </div>
                     <div class="col-md-4 border-left text-center details-page">
-                        
                         <h1 class="text-style">Reviews: <p> {{hotels_obj.review}}</p></h1>
                         <h1 class="text-style">Price: <p> ${{hotels_obj.hotel_price}}</p></h1>
                         <h1 class="text-style">Rooms: <p> {{hotels_obj.room_count}}</p></h1>
+                        
                     </div>
                     <div class="col-md-2 border-left text-center more-offers">
                         <a href="/hotel-detail/{{hotels_obj.uid}}">
-                        <!-- {{already_booked}} -->
-                        <div class="btn btn-success" {% if already_booked == "None" %} disabled {% else %}  {%endif %}>View deal </div>
+                        <button class="btn btn-success" {% if hotels_obj.room_count < 1 %} style="display:none;" {% else %} enabled  {%endif %}>View deal </button>
                     </a>
                     </div>
                 </div>
                 {% endfor %}
-               
             </div>
         </div>
 

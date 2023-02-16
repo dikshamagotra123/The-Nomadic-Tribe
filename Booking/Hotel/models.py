@@ -62,10 +62,6 @@ class HotelBooking(models.Model):
     def rooms_left(self):
         total_rooms = self.hotel.room_count
         rooms_booked = self.room_count
-        # HotelBooking.objects.get(
-        #     start_date__lte = self.start_date,
-        #     end_date__gte= self.end_date,
-        #     uid = self.uid).room_count
         available_rooms = total_rooms - rooms_booked
         return available_rooms
     

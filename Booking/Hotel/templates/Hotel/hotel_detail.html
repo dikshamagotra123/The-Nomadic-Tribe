@@ -1,80 +1,102 @@
 {% extends "Hotel/base.html" %} {% block start %} {% load static %}
 
-<div class="container mt-5 fade-in">
-	<div class="row search-card-result">
-		<div class="col-md-3">
-			<img
-				class="img-fluid"
-				src="/media/{{hotels_obj.images.first.images}}"
-				alt="Card image cap"
-			/>
-		</div>
-
-		<div class="col-md-5 mt-3">
-			<h5>{{hotels_obj.hotel_name}}</h5>
-
-			<p>{{hotels_obj.description|truncatechars:150}}</p>
-			<p>
-				{%for amenitie in hotels_obj.amenities.all %}
-				<b>{{amenitie.amenity_name}}</b> {% endfor %}
-			</p>
-		</div>
-		<div class="col-md-2 border-left text-center more-offers mt-3">
-			<p>Place.com</p>
-			<p>${{hotels_obj.hotel_price}}</p>
-			<p>{{hotels_obj.room_count}}</p>
-			<p>{{hotels_obj.room_count}}</p>
-		</div>
-		<!-- <div class="col-md-2 border-left text-center more-offers mt-5">
-			<div class="btn btn-success">View deal</div>
-		</div> -->
-	</div>
-	{% if request.user.is_authenticated %}
-	<div class="filter-card mb-3">
-		<h5>Book Hotel</h5>
-		{%include "Hotel/messages.html"%}
-		<form method="post">
-			{% csrf_token %}
-			<div class="row form-group">
-				<div class="col-md-12">
-					<label for="mintopay">Check in</label>
-					<p>
-						<input
-							type="date"
-							name="checkin"
-							id="checkin"
-							class="form-control"
-						/>
-					</p>
-				</div>
-				<div class="col-md-12">
-					<label for="maxtopay">Check out</label>
-					<p>
-						<input
-							type="date"
-							name="checkout"
-							id="checkout"
-							class="form-control"
-						/>
-					</p>
-				</div>
-			</div>
-
-			<div class="row form-group">
-				<div class="col-md-12" style="justify-content: center;display: flex;">
-					<input
-						type="submit"
-						class="btn btn-success btn-block"
-						value="Book"
+<section class="search-container mt-3">
+	<div class="container">
+		{% for hotel_obj in hotel_objs %}
+		<div class="row mt-5 fade-in">
+			<div class="col-sm-4 search-card-result">
+				<div class="col-md-5 img-center">
+					<img
+						class="img-fluid"
+						src="/media/{{hotel_obj.images.first.images}}"
+						alt="Card image cap"
 					/>
 				</div>
-			</div>
-		</form>
-	</div>
-	{% else %}
 
-	<a href="/accounts/login/" class="btn btn-primary mt-5">Login</a>
-	{% endif %}
-</div>
+				<div class="col-md-5 text-center mt-3 img-center">
+					<h5>{{hotel_obj.hotel_name}}</h5>
+
+					<p>{{hotel_obj.description|truncatechars:150}}</p>
+					<p>
+						{%for amenitie in hotel_obj.amenities.all %}
+						<b>{{amenitie.amenity_name}}</b> {% endfor %}
+					</p>
+				</div>
+				<div
+					class="col-md-2 border-left text-center more-offers mt-3 img-center"
+				>
+					<p>{{hotel_obj.review}}</p>
+					<p>${{hotel_obj.hotel_price}}</p>
+					<p>{{hotel_obj.room_count}}</p>
+				</div>
+				<!-- <div class="col-md-2 border-left text-center more-offers mt-5">
+			<div class="btn btn-success">View deal</div>
+		</div> -->
+			</div>
+			{% if request.user.is_authenticated %}
+			<div class="col-sm-7 filter-card mar-top1 mb-3">
+				<h5>Book Hotel</h5>
+				{%include "Hotel/messages.html"%}
+				<form method="post">
+					{% csrf_token %}
+					<div class="row form-group">
+						<div class="col-md-12">
+							<label for="mintopay">Check in</label>
+							<p>
+								<input
+									type="date"
+									name="checkin"
+									id="checkin"
+									class="form-control"
+								/>
+							</p>
+						</div>
+						<div class="col-md-12">
+							<label for="maxtopay">Check out</label>
+							<p>
+								<input
+									type="date"
+									name="checkout"
+									id="checkout"
+									class="form-control"
+								/>
+							</p>
+						</div>
+						<div class="col-md-12">
+							<label for="maxtopay">Rooms</label>
+							<p>
+								<input
+									type="number"
+									id="quantity"
+									name="quantity"
+									min="1"
+									max="{{hotel_obj.room_count}}"
+								/>
+							</p>
+						</div>
+					</div>
+
+					<div class="row form-group">
+						<div
+							class="col-md-12"
+							style="justify-content: center; display: flex"
+						>
+							<input
+								type="submit"
+								class="btn btn-success btn-block"
+								value="Book"
+							/>
+						</div>
+					</div>
+				</form>
+			</div>
+			{% else %}
+
+			<a href="/accounts/login/" class="btn btn-primary mt-5">Login</a>
+			{% endif %}
+		</div>
+		{% endfor %}
+	</div>
+</section>
 
 {% endblock %}
