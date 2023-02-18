@@ -7,6 +7,8 @@ from django.apps import AppConfig
 class Adventures(models.Model):
     uid = models.UUIDField(default=uuid.uuid4   , editable=False , primary_key=True)
     adventure_name = models.CharField(max_length=100)
+    adventure_description = models.TextField(max_length=250,default="Description")
+    adventure_price = models.DecimalField(decimal_places=2,max_digits=4,default=50)
 
     def __str__(self) -> str:
         return self.adventure_name
@@ -21,8 +23,6 @@ class Amenities(models.Model):
         return self.amenity_name
     class Meta:
         verbose_name_plural = "Amenities"
-
-
 
 class Hotel(models.Model):
     uid = models.UUIDField(default=uuid.uuid4   , editable=False , primary_key=True)
@@ -47,16 +47,24 @@ class HotelImage(models.Model):
 
 
 class HotelBooking(models.Model):
+    import datetime
     uid = models.UUIDField(default=uuid.uuid4   , editable=False , primary_key=True)
     hotel= models.ForeignKey(Hotel  , related_name="hotel_bookings" , on_delete=models.CASCADE)
     user = models.ForeignKey(User, related_name="user_bookings" , on_delete=models.CASCADE)
-    start_date = models.DateField()
-    end_date = models.DateField()
+    start_date = models.DateField(default=datetime.date.today)
+    end_date = models.DateField(default=datetime.date.today)
     room_count = models.IntegerField(default=1)
     booking_type= models.CharField(max_length=100,choices=(('Pre Paid' , 'Pre Paid') , ('Post Paid' , 'Post Paid')))
-
+    
     def __str__(self) -> str:
         return self.hotel.hotel_name
+
+    
+    @property
+    def total_price(self):
+        nights = (self.end_date - self.start_date).days
+        total_price = nights * self.hotel.hotel_price * self.room_count
+        return total_price
 
     @property
     def rooms_left(self):

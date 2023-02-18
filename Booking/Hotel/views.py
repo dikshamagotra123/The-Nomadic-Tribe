@@ -89,13 +89,14 @@ def hotel_detail(request,uid):
         checkin = request.POST.get('checkin')
         checkout= request.POST.get('checkout')
         rooms = request.POST.get('rooms')
-        print(f"{checkout=}")
-        hotel = Hotel.objects.all()
+        adventure_list = request.POST.get('adventures')
+        hotel = Hotel.objects.filter(uid=uid)
         print(f"{hotel[0].room_count=}")
 
         hotel_booking_obj = HotelBooking.objects.get(hotel__uid=uid, start_date=checkin,end_date=checkout,user=user)
         
         available_hotels_list ,booked_hotels_list = check_booking(checkin, checkout, hotel)
+        
         
 
         if len(booked_hotels_list) > 0:

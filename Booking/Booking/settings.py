@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'django.contrib.sites',
     
     'Hotel', #Custom App
+    'multiselectfield',
     
     'crispy_forms',
 	# Django-allauth apps
