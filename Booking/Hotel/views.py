@@ -99,8 +99,7 @@ def hotel_detail(request,uid):
         print(f"{hotel[0].room_count=}")
 
         try:
-            hotel_booking_obj = HotelBooking.objects.get(hotel__uid=uid, start_date=checkin,end_date=checkout,
-                                                         user=user,booking_price=price,adventures_booked=adventure_list)
+            hotel_booking_obj = HotelBooking.objects.get(hotel__uid=uid, start_date=checkin,end_date=checkout,user=user)
         except:
             hotel_booking_obj=None
 
