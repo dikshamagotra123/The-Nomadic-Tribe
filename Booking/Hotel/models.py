@@ -54,17 +54,12 @@ class HotelBooking(models.Model):
     start_date = models.DateField(default=datetime.date.today)
     end_date = models.DateField(default=datetime.date.today)
     room_count = models.IntegerField(default=1)
+    booking_price = models.IntegerField(default=100 )
+    adventures_booked = models.CharField(max_length=100,null=True,blank=True)
     booking_type= models.CharField(max_length=100,choices=(('Pre Paid' , 'Pre Paid') , ('Post Paid' , 'Post Paid')))
     
     def __str__(self) -> str:
         return self.hotel.hotel_name
-
-    
-    @property
-    def total_price(self):
-        nights = (self.end_date - self.start_date).days
-        total_price = nights * self.hotel.hotel_price * self.room_count
-        return total_price
 
     @property
     def rooms_left(self):
@@ -72,6 +67,7 @@ class HotelBooking(models.Model):
         rooms_booked = self.room_count
         available_rooms = total_rooms - rooms_booked
         return available_rooms
+
     
 
 

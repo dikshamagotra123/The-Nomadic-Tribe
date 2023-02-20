@@ -1,93 +1,177 @@
 {% extends "Hotel/base.html" %} {% block start %} {% load static %}
 
+<section>
+	<div class="container">
+		<div class="gallery">
+			<div class="gallery__item gallery__item--hor">
+				<img src="https://source.unsplash.com/random/500x500" alt="">
+			</div>
+			<div class="gallery__item">
+				<img src="https://source.unsplash.com/collection/190727/300x300" alt="">
+			</div>
+			<div class="gallery__item">
+				<img src="https://source.unsplash.com/user/erondu/600x600" alt="">
+			</div>
+			<div class="gallery__item gallery__item--vert">
+				<img src="https://source.unsplash.com/user/timmarshall/300x300" alt="">
+			</div>
+			<div class="gallery__item gallery__item--lg">
+				<img src="https://source.unsplash.com/user/randomlies/300x300" alt="">
+			</div>
+			<div class="gallery__item">
+				<img src="https://source.unsplash.com/user/joannecaselynsuarez/300x300" alt="">
+			</div>
+			<div class="gallery__item">
+				<img src="https://source.unsplash.com/user/liamsimpson/600x600" alt="">
+			</div>
+			<div class="gallery__item">
+				<img src="https://source.unsplash.com/user/stephanvancephoto/300x300" alt="">
+			</div>
+			<div class="gallery__item">
+				<img src="https://source.unsplash.com/user/beataratuszniak/300x300" alt="">
+			</div>
+			<div class="gallery__item">
+				<img src="https://source.unsplash.com/user/tonill/300x300" alt="">
+			</div>
+			<!--<div class="gallery__item">
+			<img src="https://source.unsplash.com/user/rawpixel/300x300" alt="">
+		  </div>
+		  <div class="gallery__item">
+			<img src="https://source.unsplash.com/user/atlasior/300x300" alt="">
+		  </div> -->
+		</div>
+	</div>
+</section>
 <section class="search-container mt-3">
 	<div class="container">
 		{% for hotel_booking_obj in hotel_booking_objs|slice:":1" %}
 		<div class="row mt-5 fade-in">
-			<div class="col-sm-4 search-card-result">
-				<div class="col-md-5 img-center">
-					<img
-						class="img-fluid"
-						src="/media/{{hotel_booking_obj.hotel.images.first.images}}"
-						alt="Card image cap"
-					/>
-				</div>
+			<div class="col-sm-12 search-card-result">
+				<!-- <div class="col-md-5 img-center">
+					<img class="img-fluid" src="/media/{{hotel_booking_obj.hotel.images.first.images}}"
+						alt="Card image cap" />
+				</div> -->
 
-				<div class="col-md-5 text-center mt-3 img-center">
-					<h5>{{hotel_booking_obj.hotel.hotel_name}}</h5>
+				<div class="row">
+					<div class="col-md-4 text-center mt-3 img-center">
+						<h5>{{hotel_booking_obj.hotel_name}}</h5>
 
-					<p>{{hotel_booking_obj.hotel.description|truncatechars:150}}</p>
-					<p>
-						{%for amenitie in hotel_booking_obj.hotel.amenities.all %}
-						<b>{{amenitie.amenity_name}}</b> {% endfor %}
-					</p>
+						<p>{{hotel_booking_obj.description|truncatechars:150}}</p>
+					</div>
+					<div class="col-md-5 border-left text-center more-offers mt-3 img-center">
+						<div class="star-rating">
+							<div>
+								<span class="star-icon filled">★</span>
+								<span class="star-icon filled">★</span>
+								<span class="star-icon filled">★</span>
+								<span class="star-icon filled">★</span>
+								<span class="star-icon">★</span>
+							</div>
+							<div class="review-txt"><span>{{hotel_booking_obj.review}}</span></div>
+						</div>
+						<p>CAD {{hotel_booking_obj.hotel_price}}</p>
+						<p>{{hotel_booking_obj.room_count}}</p>
+					</div>
 				</div>
-				<div
-					class="col-md-2 border-left text-center more-offers mt-3 img-center"
-				>
-					<p>{{hotel_booking_obj.hotel.review}}</p>
-					<p>${{hotel_booking_obj.hotel.hotel_price}}</p>
-					<p>{{hotel_booking_obj.hotel.room_count}}</p>
+				<div class="row">
+					<div class="col-md-2 text-center mt-3 img-center">
+						<p>Amenities:</p>
+					</div>
+					<div class="col-md-10 text-center mt-3 img-center">
+						<div class="amentities-svg">
+							<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128">
+								<path
+									d="M56.33 100a4 4 0 0 1-2.82-1.16L20.68 66.12a4 4 0 1 1 5.64-5.65l29.57 29.46 45.42-60.33a4 4 0 1 1 6.38 4.8l-48.17 64a4 4 0 0 1-2.91 1.6z">
+								</path>
+							</svg>
+						</div>
+						<p class="amentities-txt">
+							{%for amenitie in hotel_booking_obj.amenities.all %}
+							<b> {{amenitie.amenity_name}}</b> {% endfor %}
+						</p>
+					</div>
 				</div>
+				<!-- <div class="row">
+					<div class="col-md-2 text-center mt-3 img-center">
+						<p>Adventures:</p>
+					</div>
+					<div>
+						{%for adventure in hotel_booking_obj.hotel.adventures.all %}
+						<div class="text-center mt-3 img-center">
+							<p class="amentities-txt">
+								<b> {{adventure.adventure_name}}</b> 
+							</p>
+						</div>{% endfor %}
+					</div>
+				</div> -->
 				<!-- <div class="col-md-2 border-left text-center more-offers mt-5">
 			<div class="btn btn-success">View deal</div>
 		</div> -->
 			</div>
+
+		</div>
+		<div class="row">
 			{% if request.user.is_authenticated %}
-			<div class="col-sm-7 filter-card mar-top1 mb-3">
+			<div class="col-sm-12 filter-card mar-top1 mb-3">
 				<h5>Book Hotel</h5>
 				{%include "Hotel/messages.html"%}
-				<form method="post">
+				<form method="post" id="form">
 					{% csrf_token %}
 					<div class="row form-group">
 						<div class="col-md-12">
 							<label for="mintopay">Check in</label>
 							<p>
-								<input
-									type="date"
-									name="checkin"
-									id="checkin"
-									class="form-control"
+								<input type="date" name="checkin" id="checkin" class="form-control" 
 								/>
 							</p>
 						</div>
 						<div class="col-md-12">
 							<label for="maxtopay">Check out</label>
 							<p>
-								<input
-									type="date"
-									name="checkout"
-									id="checkout"
-									class="form-control"
-								/>
+								<input type="date" name="checkout" id="checkout" class="form-control"
+								value="{{hotel_booking_obj.end_date}}" />
 							</p>
 						</div>
+						<input type="text" style="display: none;" name="hotel_price" id="hotel_price" class="form-control"
+								value="{{hotel_booking_obj.hotel_price}}" />
 						<div class="col-md-12">
 							<label for="maxtopay">Rooms</label>
 							<p>
-								<input
-									type="number"
-									id="quantity"
-									name="rooms"
-									min="1"
-									max="{{hotel_booking_obj.hotel.room_count}}"
-								/>
+								<input type="number" id="quantity" name="rooms" min="1"
+									max="{{hotel_booking_obj.rooms_left}}" value="{{hotel_booking_obj.rooms_left}}"/>
 							</p>
 						</div>
-					</div>
-
-					<div class="row form-group">
-						<div
-							class="col-md-12"
-							style="justify-content: center; display: flex"
-						>
-							<input
-								type="submit"
-								class="btn btn-success btn-block"
-								value="Book"
-							/>
+						<div class="col-md-12">
+							<label for="maxtopay">Price</label>
+							<p>
+								<input type="text" disabled name="price" id="price"
+									value=""/>
+							</p>
 						</div>
-					</div>
+						<div class="col-md-12">
+							<label for="maxtopay">Adventures</label>
+							<p>
+								<div class="multiselect" tabindex="0">
+									<div class="mslabel"  onfocus="" >Select some...</div>
+									<div class="mstogglebtn" tabindex="-1">&dtrif;</div>
+									<div class="mslist">
+										{%for adventure in hotel_booking_obj.adventures.all %}
+									<div class="msitem" onclick="var parent = this.parentElement; var chk = this.children[0].checked; if(chk == false){this.children[0].checked = true;} else{this.children[0].checked = false;} var collection=parent.getElementsByTagName('input');var countChked = 0; var res = ''; for(var i=0; i< collection.length;i++){if(collection[i].checked == true){if(countChked==0){res += collection[i].value}else{res += ', '+collection[i].value;}countChked++}}if(countChked > 0){parent.parentElement.children[0].innerText = res;}else{parent.parentElement.children[0].innerText = 'Select some...';}">
+										<input type="checkbox" name="adventures" value="{{adventure.adventure_name}}" id="optionOne"/>
+										<label for="optionOne">{{adventure.adventure_name}},{{adventure.adventure_price}}</label>
+									</div>{% endfor %}
+									</div>
+								</div>
+						</p>
+						</div>
+						  
+						<div id="out"></div>
+
+						<div class="row form-group">
+							<div class="col-md-12" style="justify-content: center; display: flex">
+								<input type="submit" class="btn btn-success btn-block" value="Book" />
+							</div>
+						</div>
 				</form>
 			</div>
 			{% else %}
@@ -96,7 +180,6 @@
 			{% endif %}
 		</div>
 		{% endfor %}
-
 	</div>
 </section>
 

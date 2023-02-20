@@ -83,30 +83,48 @@ def home(request):
     return render(request , 'Hotel/home.html' ,context)
 
 def hotel_detail(request,uid):
-    hotel_booking_objs = HotelBooking.objects.filter(hotel__uid=uid)
+    # hotel_booking_objs = HotelBooking.objects.filter(hotel__uid=uid)
+    hotel_booking_objs = Hotel.objects.filter(uid=uid)
     if request.method == 'POST':
         user = request.user.id
         checkin = request.POST.get('checkin')
         checkout= request.POST.get('checkout')
         rooms = request.POST.get('rooms')
-        adventure_list = request.POST.get('adventures')
+        print(f"{type(rooms)=}")
+        adventure_list = request.POST.getlist('adventures')
+        print(f"{adventure_list=}")
+        price = request.POST.get('hotel_price')
+        print(f"{price=}")
         hotel = Hotel.objects.filter(uid=uid)
         print(f"{hotel[0].room_count=}")
 
-        hotel_booking_obj = HotelBooking.objects.get(hotel__uid=uid, start_date=checkin,end_date=checkout,user=user)
-        
+        try:
+            hotel_booking_obj = HotelBooking.objects.get(hotel__uid=uid, start_date=checkin,end_date=checkout,
+                                                         user=user,booking_price=price,adventures_booked=adventure_list)
+        except:
+            hotel_booking_obj=None
+
         available_hotels_list ,booked_hotels_list = check_booking(checkin, checkout, hotel)
         
+        try:
+            selected_hotel = available_hotels_list.get(uid=uid)
+        except:
+            selected_hotel=None
         
 
         if len(booked_hotels_list) > 0:
             messages.warning(request, 'Hotel is already booked on these dates ')
             return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
-        elif hotel_booking_obj.rooms_left < int(rooms):
+        elif hotel_booking_obj and hotel_booking_obj.rooms_left < int(rooms):
             messages.warning(request, 'There are not enough rooms available in this hotel')
             return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
         else:
-            HotelBooking.objects.create(hotel=available_hotels_list[0] , user = request.user , start_date=checkin, end_date = checkout ,room_count=rooms, booking_type  = 'Pre Paid')
+            HotelBooking.objects.create(hotel=selected_hotel , user = request.user , 
+                                        start_date=checkin, end_date = checkout ,
+                                        room_count=rooms, 
+                                        booking_type  = 'Pre Paid',
+                                        booking_price=int(price),
+                                        adventures_booked=adventure_list)
             messages.success(request, 'Your booking has been saved')
             return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
     
