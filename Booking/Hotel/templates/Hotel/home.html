@@ -4,66 +4,14 @@
 
 {% load static %}
 
-<section class="main-container">
+<!-- <section class="main-container bg-image">
     <div class="main">
-        <div class="big-circle">
-            <div class="icon-block">
-                <img
-                    src='{% static "images/logo-1.png" %}'
-                    alt="web design icon"
-                />
-            </div>
-            <div class="icon-block">
-                <img
-                    src='{% static "images/logo-2.png" %}'
-                    alt="game design icon"
-                />
-            </div>
-            <div class="icon-block">
-                <img
-                    src='{% static "images/logo-3.png" %}'
-                    alt="game dev icon"
-                />
-            </div>
-            <div class="icon-block">
-                <img
-                    src='{% static "images/logo-4.png" %}'
-                    alt="ui-ux icon"
-                />
-            </div>
-        </div>
-        <div class="circle">
-            <div class="icon-block">
-                <img
-                    src='{% static "images/logo-5.png" %}'
-                    alt="app icon"
-                />
-            </div>
-            <div class="icon-block">
-                <img
-                    src='{% static "images/logo-6.png" %}'
-                    alt="blockchain icon"
-                />
-            </div>
-            <div class="icon-block">
-                <img
-                    src='{% static "images/logo-7.png" %}'
-                    alt="ar-vr icon"
-                />
-            </div>
-            <div class="icon-block">
-                <img
-                    src='{% static "images/logo-8.png" %}'
-                    alt="artificial intelligence icon"
-                />
-            </div>
-        </div>
         <div class="center-logo">
             <h1 class="title-sec typing-demo">The Nomadic Tribe</h1>
         </div>
     </div>
-</section>
-<section class="search-container">
+</section> -->
+<!-- <section class="search-container" id="main-content">
     <div class="container">
         <div class="row">
             <div class="col-lg-3">
@@ -77,13 +25,13 @@
                                 <div class="col-md-12">
                                     <label for="mintopay">Check in</label>
                                     <p>
-                                        <input type="date" name="checkin" id="checkin" class="form-control" value="{{checkin}}">
+                                        <input type="date" name="checkin" id="checkin" class="form-control" value="{% now 'Y-m-d' %}">
                                     </p>
                                 </div>
                                 <div class="col-md-12">
                                     <label for="maxtopay">Check out</label>
                                     <p>
-                                        <input type="date" name="checkout" id="checkout" class="form-control" value="{{checkout}}">
+                                        <input type="date" name="checkout" id="checkout" class="form-control" value="{% now 'Y-m-d' %}">
                                     </p>
                                 </div>
                             </div>
@@ -102,9 +50,9 @@
                 <form>
                 <div class="row filter-bg">
                     <div class="col-md-3">
-                    <div class="form-inline">
-                        <label class="" for="exampleFormControlSelect1">Sort by</label>
-                        <select class="form-control" name="sort_by" id="exampleFormControlSelect1">
+                    <div class="form-inline filter-form">
+                        <label class="label-filter" for="exampleFormControlSelect1">Sort by</label>
+                        <select class="form-control exampleFormControlSelect1" name="sort_by" id="exampleFormControlSelect1">
                             <option value="">Recommended</option>
                             <option {% if sort_by == 'ASC' %} selected {%endif %} value="ASC">ASC</option>
                             <option {% if sort_by == 'DSC' %} selected {%endif %} value="DSC">DSC</option>
@@ -112,16 +60,16 @@
                     </div>
                     </div>
                     <div class="col-md-3">
-                        <div class="form-inline">
-                            <label class="" for="exampleFormControlSelect1">Search</label>
+                        <div class="form-inline filter-form">
+                            <label class="label-filter" for="exampleFormControlSelect1">Search</label>
 
-                            <input name="search" class="form-control" {% if search == None %} value="" {% else %} value="{{search}}" {%endif %} placeholder="Search"> 
+                            <input name="search" style="padding: 11px 9px 5px;" class="form-control exampleFormControlSelect1 " {% if search == None %} value="" {% else %} value="{{search}}" {%endif %} placeholder="Search"> 
                         </div>
                     </div>
                     <div class="col-md-3">
-                        <div class="form-inline">
-                           <label class="" for="exampleFormControlSelect1">Adventures</label>
-                            <select name="adventures" class="form-control" >
+                        <div class="form-inline filter-form">
+                           <label class=" label-filter" for="exampleFormControlSelect1">Adventures</label>
+                            <select name="adventures" class="form-control exampleFormControlSelect1" >
                                 <option value="">Choose</option>
                                 {% for adventure_obj in adventure_objs %}
                                 <option {% if adventure_obj.adventure_name in adventures  %} selected {%endif%} value="{{adventure_obj.adventure_name}}"> {{adventure_obj.adventure_name}} </option>
@@ -130,7 +78,7 @@
                         </div>
                     </div>
                     <div class="col-md-3 btn-align">
-                            <button style="margin-top: 30px;" type="submit" class="btn btn-success find-btn">Find</button>
+                            <button style="margin-top: 30px;" type="submit" class="btn btn-success find-btn">Search</button>
                     </div>
                 </div>
                 </form>
@@ -140,28 +88,44 @@
                     <div class="col-md-3">    
                         <img class="img-fluid" src="/media/{{hotels_obj.images.first.images}}" alt="Card image cap">
                     </div>
-                    <div class="col-md-3">
+                    <div class="col-md-4">
                         <h5>{{hotels_obj.hotel_name}}</h5>
                         
                         <p>
                             {{hotels_obj.description|truncatechars:150}}
                         </p>
-                        <p>
-                            {% for amenitie in hotels_obj.amenities.all %}
-                            <b>{{amenitie.amenity_name}}</b>
-                            {% endfor %}
+                        <p style="color: #008009;font-weight: 700;">
+                            FREE cancellation 
+                        </p>
+                        <p style="color: #008009;font-weight: 700;">
+                            You can cancel later, so lock in this great price today!
                         </p>
                         
                     </div>
-                    <div class="col-md-4 border-left text-center details-page">
-                        <h1 class="text-style">Reviews: <p> {{hotels_obj.review}}</p></h1>
-                        <h1 class="text-style">Price: <p> ${{hotels_obj.hotel_price}}</p></h1>
-                        <h1 class="text-style">Rooms: <p> {{hotels_obj.room_count}}</p></h1>
+                    <div class="col-md-3 mt-2">
+                        <div class="scene">
+                            <div class="cube">
+                              <span class="side top">{{hotels_obj.review}}</span>
+                              <span class="side front">Reviews</span>
+                            </div>
+                        </div>
+                        <div class="scene">
+                            <div class="cube">
+                              <span class="side top">$ {{hotels_obj.hotel_price}}</span>
+                              <span class="side front">Price</span>
+                            </div>
+                        </div>
+                        <div class="scene">
+                            <div class="cube">
+                              <span class="side top">{{hotels_obj.room_count}}</span>
+                              <span class="side front">Rooms</span>
+                            </div>
+                        </div>
                         
                     </div>
-                    <div class="col-md-2 border-left text-center more-offers">
+                    <div class="col-md-2 more-offers">
                         <a href="/hotel-detail/{{hotels_obj.uid}}">
-                        <button class="btn btn-success" {% if hotels_obj.room_count < 1 %} style="display:none;" {% else %} enabled  {%endif %}>View deal </button>
+                        <button class="btn btn-success button" {% if hotels_obj.room_count < 1 %} style="display:none;" {% else %} enabled  {%endif %}>View deal </button>
                     </a>
                     </div>
                 </div>
@@ -170,6 +134,6 @@
         </div>
 
     </div>
-</section>
+</section> -->
 
 {% endblock %}

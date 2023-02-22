@@ -53,10 +53,10 @@
 				</div> -->
 
 				<div class="row">
-					<div class="col-md-4 text-center mt-3 img-center">
+					<div class="col-md-6 mt-3 img-center">
 						<h5>{{hotel_booking_obj.hotel_name}}</h5>
 
-						<p>{{hotel_booking_obj.description|truncatechars:150}}</p>
+						<p>{{hotel_booking_obj.description|truncatechars:650}}</p>
 					</div>
 					<div class="col-md-5 border-left text-center more-offers mt-3 img-center">
 						<div class="star-rating">
@@ -74,10 +74,16 @@
 					</div>
 				</div>
 				<div class="row">
-					<div class="col-md-2 text-center mt-3 img-center">
-						<p>Amenities:</p>
+					<div class=" text-center mt-3 img-center">
+						<ul class="abtPptDtlsTags">
+							{%for amenitie in hotel_booking_obj.amenities.all %}
+							<li class="abtPptDtlsTags__item" style="border-color:#C8E6FE;background-color:#EDF6FF"><img
+									src="https://promos.makemytrip.com/hoteldescription/Propertydesktop.png"
+									alt="Food and Dining"><span class="abtPptDtlsTags__txt"
+									style="color:#040404">{{amenitie.amenity_name}}</span></li>{% endfor %}
+						</ul>
 					</div>
-					<div class="col-md-10 text-center mt-3 img-center">
+					<!-- <div class="col-md-10 text-center mt-3 img-center">
 						<div class="amentities-svg">
 							<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128">
 								<path
@@ -89,7 +95,7 @@
 							{%for amenitie in hotel_booking_obj.amenities.all %}
 							<b> {{amenitie.amenity_name}}</b> {% endfor %}
 						</p>
-					</div>
+					</div> -->
 				</div>
 				<!-- <div class="row">
 					<div class="col-md-2 text-center mt-3 img-center">
@@ -118,58 +124,75 @@
 				<form method="post" id="form">
 					{% csrf_token %}
 					<div class="row form-group">
-						<div class="col-md-12">
-							<label for="mintopay">Check in</label>
-							<p>
-								<input type="date" name="checkin" id="checkin" class="form-control" 
-								/>
-							</p>
+						<div class="row">
+							<div class="col-md-6">
+								<label for="mintopay">Check in</label>
+								<p>
+									<input type="date" name="checkin" id="checkin" class="form-control"
+										value="{% now 'Y-m-d' %}" />
+								</p>
+							</div>
+							<div class="col-md-6">
+								<label for="maxtopay">Check out</label>
+								<p>
+									<input type="date" name="checkout" id="checkout" class="form-control"
+										value="{% now 'Y-m-d' %}" />
+								</p>
+							</div>
 						</div>
-						<div class="col-md-12">
-							<label for="maxtopay">Check out</label>
-							<p>
-								<input type="date" name="checkout" id="checkout" class="form-control"
-								value="{{hotel_booking_obj.end_date}}" />
-							</p>
-						</div>
-						<input type="text" style="display: none;" name="hotel_price" id="hotel_price" class="form-control"
-								value="{{hotel_booking_obj.hotel_price}}" />
-						<div class="col-md-12">
-							<label for="maxtopay">Rooms</label>
-							<p>
+						<input type="text" style="display: none;" name="hotel_price" id="hotel_price"
+							class="form-control" value="{{hotel_booking_obj.hotel_price}}" />
+						<div class="row">
+							<div class="col-md-6">
+								<label for="maxtopay">Rooms</label>
+								<p>
+									{% if hotel_booking_obj.room_count == 1 %}
+								<div style="display: flex;">
+									<input type="number" id="quantity" name="rooms" min="1"
+										max="{{hotel_booking_obj.room_count}}"
+										value="{{hotel_booking_obj.room_count}}" />
+									<p class="zoom-in-out-box">1 Room Left</p>
+								</div>
+								{% else %}
 								<input type="number" id="quantity" name="rooms" min="1"
-									max="{{hotel_booking_obj.rooms_left}}" value="{{hotel_booking_obj.rooms_left}}"/>
-							</p>
-						</div>
-						<div class="col-md-12">
-							<label for="maxtopay">Price</label>
-							<p>
-								<input type="text" disabled name="price" id="price"
-									value=""/>
-							</p>
-						</div>
-						<div class="col-md-12">
-							<label for="maxtopay">Adventures</label>
-							<p>
+									max="{{hotel_booking_obj.room_count}}" value="{{hotel_booking_obj.room_count}}" />
+								{% endif %}
+								</p>
+							</div>
+							<div class="col-md-6">
+								<label for="maxtopay">Adventures</label>
+								<p>
 								<div class="multiselect" tabindex="0">
-									<div class="mslabel"  onfocus="" >Select some...</div>
+									<div class="mslabel" onfocus="">Select some...</div>
 									<div class="mstogglebtn" tabindex="-1">&dtrif;</div>
 									<div class="mslist">
 										{%for adventure in hotel_booking_obj.adventures.all %}
-									<div class="msitem" onclick="var parent = this.parentElement; var chk = this.children[0].checked; if(chk == false){this.children[0].checked = true;} else{this.children[0].checked = false;} var collection=parent.getElementsByTagName('input');var countChked = 0; var res = ''; for(var i=0; i< collection.length;i++){if(collection[i].checked == true){if(countChked==0){res += collection[i].value}else{res += ', '+collection[i].value;}countChked++}}if(countChked > 0){parent.parentElement.children[0].innerText = res;}else{parent.parentElement.children[0].innerText = 'Select some...';}">
-										<input type="checkbox" name="adventures" value="{{adventure.adventure_name}}" id="optionOne"/>
-										<label for="optionOne">{{adventure.adventure_name}},{{adventure.adventure_price}}</label>
-									</div>{% endfor %}
+										<div class="msitem"
+											onclick="var parent = this.parentElement; var chk = this.children[0].checked; if(chk == false){this.children[0].checked = true;} else{this.children[0].checked = false;} var collection=parent.getElementsByTagName('input');var countChked = 0; var res = ''; for(var i=0; i< collection.length;i++){if(collection[i].checked == true){if(countChked==0){res += collection[i].value}else{res += ', '+collection[i].value;}countChked++}}if(countChked > 0){parent.parentElement.children[0].innerText = res;}else{parent.parentElement.children[0].innerText = 'Select some...';}">
+											<input type="checkbox" name="adventures"
+												value="{{adventure.adventure_name}}" id="optionOne" />
+											<label
+												for="optionOne">{{adventure.adventure_name}},{{adventure.adventure_price}}</label>
+										</div>{% endfor %}
 									</div>
 								</div>
-						</p>
+								</p>
+							</div>
 						</div>
-						  
+						<div class="col-md-6">
+							<label for="maxtopay">Price</label>
+							<p>
+								<input type="text" disabled name="price" id="price"
+									value="$ {{hotel_booking_obj.hotel_price}}" />
+							</p>
+						</div>
+
 						<div id="out"></div>
 
 						<div class="row form-group">
 							<div class="col-md-12" style="justify-content: center; display: flex">
-								<input type="submit" class="btn btn-success btn-block" value="Book" />
+								<input type="submit" class="btn btn-success btn-block" value="Book"
+									onclick="return confirm('Are you sure, you want to Book?')" />
 							</div>
 						</div>
 				</form>
