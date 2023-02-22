@@ -83,20 +83,15 @@ def home(request):
     return render(request , 'Hotel/home.html' ,context)
 
 def hotel_detail(request,uid):
-    # hotel_booking_objs = HotelBooking.objects.filter(hotel__uid=uid)
     hotel_booking_objs = Hotel.objects.filter(uid=uid)
     if request.method == 'POST':
         user = request.user.id
         checkin = request.POST.get('checkin')
         checkout= request.POST.get('checkout')
         rooms = request.POST.get('rooms')
-        print(f"{type(rooms)=}")
         adventure_list = request.POST.getlist('adventures')
-        print(f"{adventure_list=}")
         price = request.POST.get('hotel_price')
-        print(f"{price=}")
         hotel = Hotel.objects.filter(uid=uid)
-        print(f"{hotel[0].room_count=}")
 
         try:
             hotel_booking_obj = HotelBooking.objects.get(hotel__uid=uid, start_date=checkin,end_date=checkout,user=user)
@@ -130,3 +125,8 @@ def hotel_detail(request,uid):
     return render(request , 'Hotel/hotel_detail.html' ,{
         'hotel_booking_objs':hotel_booking_objs,
     })
+
+def profile_page(request,id):
+    user_obj = User.objects.get(id=id)
+    context = {'user_obj':user_obj}
+    return render(request,"Hotel/profile.html",context)

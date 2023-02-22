@@ -37,14 +37,10 @@ class Hotel(models.Model):
     def __str__(self) -> str:
         return self.hotel_name
     
-
-
 class HotelImage(models.Model):
     uid = models.UUIDField(default=uuid.uuid4   , editable=False , primary_key=True)
     hotel= models.ForeignKey(Hotel ,related_name="images", on_delete=models.CASCADE)
     images = models.ImageField(upload_to="hotels")
-
-
 
 class HotelBooking(models.Model):
     import datetime
