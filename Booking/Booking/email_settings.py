@@ -11,3 +11,12 @@ EMAIL_PORT = 587
 EMAIL_HOST_USER = 'saksham12356@gmail.com'
 EMAIL_HOST_PASSWORD = 'gqnqypupxhgjyqqz'
 DEFAULT_FROM_EMAIL = EMAIL_HOST_USER
+
+ACCOUNT_USERNAME_BLACKLIST = ['administrator', 'help',
+                              'helpdesk', 'operator',
+                              'root', 'superadmin',
+                              'superuser', 'info@',
+                              'admin', 'webmaster',
+                              'areariservata', 'blog'
+                              '@', 'master']
+                              # Ban a list of names as a choice
