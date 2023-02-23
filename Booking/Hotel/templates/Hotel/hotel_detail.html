@@ -113,7 +113,7 @@
 		</div>
 
 	</div>
-	<div class="row">
+	<div class="row " style="justify-content: center; display: flex">
 		{% if request.user.is_authenticated %}
 		<div class="col-sm-12 filter-card mar-top1 mb-3">
 			<h5>Book Hotel</h5>
@@ -186,7 +186,7 @@
 
 					<div id="out"></div>
 
-					<div class="row form-group">
+					<div class="row form-group ">
 						<div class="col-md-12" style="justify-content: center; display: flex">
 							<input type="submit" class="btn btn-success btn-block" value="Book"
 								onclick="return confirm('Are you sure, you want to Book?')" />
@@ -196,7 +196,7 @@
 		</div>
 		{% else %}
 
-		<a href="/accounts/login/" class="btn btn-primary mt-5">Login</a>
+		<a href="/accounts/login/" class="btn btn-primary btn-block mt-5">Login</a>
 		{% endif %}
 	</div>
 	{% endfor %}
