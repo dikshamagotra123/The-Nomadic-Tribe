@@ -85,13 +85,19 @@
 		.msitem label {
 			position: absolute;
 			border-bottom: 1px solid #eee;
-			font-size: 15px;
+			font-size: 16px;
 			cursor: pointer;
 			top: 0;
 			bottom: 0;
 			left: 0;
 			right: 0;
-			padding-left: 20px;
+			padding-left: 21px;
+		}
+
+		.label-style {
+			color: #000;
+			font-size: 18px;
+			font-weight: 600;
 		}
 
 		.msitem:first-child label {
@@ -350,13 +356,14 @@
 		#quantity,
 		#price {
 			width: 40% !important;
+			font-size: 16px;
 		}
 
 		#price {
 			border: none;
 			color: black;
 			font-weight: 800;
-			font-size: 20px;
+			font-size: 20px !important;
 		}
 
 		#subscribe-panel.btn {
@@ -547,6 +554,20 @@
 			padding: 1.5rem 2rem;
 			background: #fff;
 			border-radius: 8px;
+		}
+
+		@keyframes gradient {
+			0% {
+				background-position: 0% 50%;
+			}
+
+			50% {
+				background-position: 100% 50%;
+			}
+
+			100% {
+				background-position: 0% 50%;
+			}
 		}
 
 		.map-btn {
@@ -840,8 +861,8 @@
 		/* center logo */
 		.center-logo {
 			position: absolute;
-			top: 29%;
-			left: 15%;
+			bottom: 5%;
+			right: -17%;
 			transform: translate(-50%, -50%);
 			-webkit-transform: translate(-50%, -50%);
 			/* overflow: hidden; */
@@ -1001,13 +1022,13 @@
 		}
 
 		.typing-demo {
-			width: 14ch;
+			width: 22ch;
 			animation: typing 2s steps(22), blink 0.5s step-end infinite alternate;
-			white-space: nowrap;
-			overflow: hidden;
+			/* white-space: nowrap;
+			overflow: hidden; */
 			border-right: 3px solid;
 			font-family: monospace;
-			font-size: 4em;
+			font-size: 5em;
 		}
 
 		@keyframes typing {
@@ -1053,7 +1074,7 @@
 		}
 
 		.more-offers {
-			margin-top: 9%;
+			margin-top: 6% !important;
 		}
 
 		.scene {
@@ -1069,8 +1090,7 @@
 			transition: all 0.85s cubic-bezier(.17, .67, .14, .93);
 			transform-style: preserve-3d;
 			transform-origin: 100% 50%;
-			width: 10em;
-			height: 4em;
+			height: 7em;
 		}
 
 		.cube:hover {
@@ -1087,6 +1107,7 @@
 			text-transform: uppercase;
 			padding-top: 1.2em;
 			font-weight: bold;
+			font-size: 1.4em;
 		}
 
 		.top {
@@ -1095,6 +1116,9 @@
 			transform: rotateX(90deg) translate3d(0, 0, 2em);
 			box-shadow: inset 0 0 0 5px #fff;
 			border-radius: 25px;
+			padding: 24%;
+			width: 15em;
+			height: 5em;
 		}
 
 		.front {
@@ -1103,6 +1127,9 @@
 			box-shadow: inset 0 0 0 5px #fff;
 			transform: translate3d(0, 0, 2em);
 			border-radius: 25px;
+			padding: 24%;
+			width: 15em;
+			height: 5em;
 		}
 
 		.topBotomBordersOut {
@@ -1154,8 +1181,9 @@
 			background: blue;
 			border-radius: 5px;
 			color: white;
-			padding: 2% 3% 2% 3%;
-			margin-left: -5%;
+			padding: 1% 3% 1% 3%;
+			margin-left: -10%;
+			font-size: 18px;
 		}
 
 		.star-rating {
@@ -1184,8 +1212,8 @@
 			color: white;
 			font-size: 20px;
 			text-align: center;
-			margin-top: 15%;
-			margin-bottom: 0;
+			margin: 0px 10px;
+			padding: 10px 10px;
 		}
 
 		.gallery {
@@ -1195,8 +1223,12 @@
 			grid-auto-rows: 200px;
 			grid-auto-flow: dense;
 			max-width: 1200px;
-			margin: 10px auto;
+			margin: 50px auto;
 			padding: 0 10px;
+		}
+
+		.mt-6 {
+			margin-top: -6rem !important;
 		}
 
 		.gallery__item {
@@ -1249,6 +1281,18 @@
 			margin: 0.8%;
 			color: #f50057;
 			animation: zoom-in-zoom-out 1s ease infinite;
+			margin-left: 4%;
+			font-size: 15px;
+			font-weight: 600;
+		}
+
+		.fancy-text {
+			font-family: Helvetica Neue, Helvetica, Arial, sans-serif;
+			font-size: 1rem;
+			font-weight: 500;
+			letter-spacing: 2px;
+			text-align: center;
+			color: #00A97F;
 		}
 
 		@keyframes zoom-in-zoom-out {
@@ -1396,7 +1440,9 @@
 		}
 
 		.container-fluid {
-			background: linear-gradient(to right, #22c1c3, #fdbb2d);
+			background: linear-gradient(-45deg, #ee7752, #e73c7e, #23a6d5, #23d5ab);
+			background-size: 400% 400%;
+			animation: gradient 15s ease infinite;
 			padding: 3%;
 		}
 
@@ -1411,6 +1457,10 @@
 			align-items: center;
 			text-align: center;
 			padding: 0 2rem;
+		}
+
+		.bg-primary {
+			background: #000 !important;
 		}
 	</style>
 </head>
@@ -1445,138 +1495,11 @@
 			</div>
 		</div>
 	</nav>
+	{% block content %}
+	{% endblock content %}
 	<!-- End of Navbar -->
 
-	<!--Full-Screen Splash Image with Flexbox center text-->
-	<div id="splashImage" class="container-fluid">
-		<div class="center-logo">
-			<h1 class="title-sec typing-demo">The Nomadic Tribe</h1>
-		</div>
-	</div> <!-- End of full Screen Splash screen -->
 
-	<div class="container-fluid">
-        <div class="row">
-            <div class="col-lg-3">
-                <div class="row my-3">
-                </div>
-                <div class="row mt-2 justify-content-between">
-                    <div class="filter-card">
-                        <h5>Filter</h5>
-                        <form action="#">
-                            <div class="row form-group">
-                                <div class="col-md-12">
-                                    <label for="mintopay">Check in</label>
-                                    <p>
-                                        <input type="date" name="checkin" id="checkin" class="form-control" value="{% now 'Y-m-d' %}">
-                                    </p>
-                                </div>
-                                <div class="col-md-12">
-                                    <label for="maxtopay">Check out</label>
-                                    <p>
-                                        <input type="date" name="checkout" id="checkout" class="form-control" value="{% now 'Y-m-d' %}">
-                                    </p>
-                                </div>
-                            </div>
-                           
-                            <div class="row form-group">
-                                <div class="col-md-12" style="justify-content: center;display: flex;" >
-                                    <input type="submit" class="btn btn-success btn-block" value="Filter">
-                                </div>
-                            </div>
-                        </form>
-                    </div>
-                </div>
-            </div>
-
-            <div class="col-lg-9 mb-5">
-                <form>
-                <div class="row filter-bg">
-                    <div class="col-md-3">
-                    <div class="form-inline filter-form">
-                        <label class="label-filter" for="exampleFormControlSelect1">Sort by</label>
-                        <select class="form-control exampleFormControlSelect1" name="sort_by" id="exampleFormControlSelect1">
-                            <option value="">Recommended</option>
-                            <option {% if sort_by == 'ASC' %} selected {%endif %} value="ASC">ASC</option>
-                            <option {% if sort_by == 'DSC' %} selected {%endif %} value="DSC">DSC</option>
-                        </select>
-                    </div>
-                    </div>
-                    <div class="col-md-3">
-                        <div class="form-inline filter-form">
-                            <label class="label-filter" for="exampleFormControlSelect1">Search</label>
-
-                            <input name="search" style="padding: 11px 9px 5px;" class="form-control exampleFormControlSelect1 " {% if search == None %} value="" {% else %} value="{{search}}" {%endif %} placeholder="Search"> 
-                        </div>
-                    </div>
-                    <div class="col-md-3">
-                        <div class="form-inline filter-form">
-                           <label class=" label-filter" for="exampleFormControlSelect1">Adventures</label>
-                            <select name="adventures" class="form-control exampleFormControlSelect1" >
-                                <option value="">Choose</option>
-                                {% for adventure_obj in adventure_objs %}
-                                <option {% if adventure_obj.adventure_name in adventures  %} selected {%endif%} value="{{adventure_obj.adventure_name}}"> {{adventure_obj.adventure_name}} </option>
-                                {% endfor %}
-                            </select>
-                        </div>
-                    </div>
-                    <div class="col-md-3 btn-align">
-                            <button style="margin-top: 30px;" type="submit" class="btn btn-success find-btn">Search</button>
-                    </div>
-                </div>
-                </form>
-                
-                {% for hotels_obj in hotels_objs %}
-                <div class="row search-card-result">
-                    <div class="col-md-3">    
-                        <img class="img-fluid" src="/media/{{hotels_obj.images.first.images}}" alt="Card image cap">
-                    </div>
-                    <div class="col-md-4">
-                        <h5>{{hotels_obj.hotel_name}}</h5>
-                        
-                        <p>
-                            {{hotels_obj.description|truncatechars:150}}
-                        </p>
-                        <p style="color: #008009;font-weight: 700;">
-                            FREE cancellation 
-                        </p>
-                        <p style="color: #008009;font-weight: 700;">
-                            You can cancel later, so lock in this great price today!
-                        </p>
-                        
-                    </div>
-                    <div class="col-md-3 mt-2">
-                        <div class="scene">
-                            <div class="cube">
-                              <span class="side top">{{hotels_obj.review}}</span>
-                              <span class="side front">Reviews</span>
-                            </div>
-                        </div>
-                        <div class="scene">
-                            <div class="cube">
-                              <span class="side top">$ {{hotels_obj.hotel_price}}</span>
-                              <span class="side front">Price</span>
-                            </div>
-                        </div>
-                        <div class="scene">
-                            <div class="cube">
-                              <span class="side top">{{hotels_obj.room_count}}</span>
-                              <span class="side front">Rooms</span>
-                            </div>
-                        </div>
-                        
-                    </div>
-                    <div class="col-md-2 more-offers">
-                        <a href="/hotel-detail/{{hotels_obj.uid}}">
-                        <button class="btn btn-success button" {% if hotels_obj.room_count < 1 %} style="display:none;" {% else %} enabled  {%endif %}>View deal </button>
-                    </a>
-                    </div>
-                </div>
-                {% endfor %}
-            </div>
-        </div>
-
-    </div>
-	<!-- End of container -->
 
 	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js"
 		integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2"
