@@ -1,10 +1,13 @@
+import stripe
 from django.shortcuts import render , redirect
 from django.contrib.auth.models import User
-from django.contrib.auth import authenticate , login
 from django.contrib import messages
 from django.http import HttpResponseRedirect, JsonResponse
 from .models import (Adventures, Hotel, HotelBooking)
 from django.db.models import Q
+from django.views import View
+from django.views.generic.base import TemplateView 
+from Booking.stripe_settings import *
 
 def check_booking(start_date,end_date,hotels):
     
@@ -113,14 +116,15 @@ def hotel_detail(request,uid):
             messages.warning(request, 'There are not enough rooms available in this hotel')
             return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
         else:
-            HotelBooking.objects.create(hotel=selected_hotel , user = request.user , 
-                                        start_date=checkin, end_date = checkout ,
-                                        room_count=rooms, 
-                                        booking_type  = 'Pre Paid',
-                                        booking_price=int(price),
-                                        adventures_booked=adventure_list)
-            messages.success(request, 'Your booking has been saved')
-            return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
+            # HotelBooking.objects.create(hotel=selected_hotel , user = request.user , 
+            #                             start_date=checkin, end_date = checkout ,
+            #                             room_count=rooms, 
+            #                             booking_type  = 'Pre Paid',
+            #                             booking_price=int(price),
+            #                             adventures_booked=adventure_list)
+            return redirect('/product-checkout-info/?hotel=' + selected_hotel.hotel_name + '&start_date=' + checkin + '&end_date=' + checkout + '&room_count=' + rooms + '&booking_price=' + price + '&adventures_booked='+str(adventure_list))
+            # messages.success(request, 'Your booking has been saved')
+            # return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
     
     return render(request , 'Hotel/hotel_detail.html' ,{
         'hotel_booking_objs':hotel_booking_objs,
@@ -130,3 +134,36 @@ def profile_page(request,id):
     user_obj = User.objects.get(id=id)
     context = {'user_obj':user_obj}
     return render(request,"Hotel/profile.html",context)
+
+
+
+def SuccessView(request):
+    return render(request,'success.html')
+
+
+def CancelView(request):
+    return render(request,'cancel.html')
+
+
+def ProductLandingPageView(request):
+    if request.method == 'GET':
+        user = request.user.id
+        checkin = request.GET.get('start_date')
+        checkout= request.GET.get('end_date')
+        rooms = request.GET.get('room_count')
+        selected_hotel = request.GET.get('hotel')
+        price = request.GET.get('booking_price')
+        print(f"{price=}")
+        context = {
+            'user':user,
+            'checkin':checkin,
+            'checkout':checkout,
+            'rooms':rooms,
+            'price':price,
+            'selected_hotel':selected_hotel
+        }
+        context.update({
+            "STRIPE_PUBLIC_KEY": STRIPE_PUBLISHABLE_KEY
+        })
+        return render(request,"landing.html",context=context)
+
