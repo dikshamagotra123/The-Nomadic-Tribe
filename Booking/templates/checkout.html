@@ -209,21 +209,9 @@
 			<!-- <button type="button" id="checkout-button">Checkout</button> -->
 			<hr />
 			<div class="col-md-6 text-center pt-3">
-				<form action="{% url 'success' %}" method="POST">
+				<form method="post" action="{% url 'checkout_session' selected_hotel price %}">
 					{% csrf_token %}
-					<script
-						src="https://checkout.stripe.com/checkout.js"
-						class="stripe-button"
-						data-key="{{STRIPE_PUBLIC_KEY}}"
-						data-amount="{{ price }}"
-						data-name="{{selected_hotel}}"
-						data-description="Premium Membership"
-						data-email="{{ user.email }}"
-						data-image="https://stripe.com/img/documentation/checkout/marketplace.png"
-						data-locale="auto"
-					></script>
-					<!-- <input type="hidden" value="{{ plan }}" name="plan" />
-				<input type="hidden" value="{{ coupon }}" name="coupon" /> -->
+					<input type="submit" value="Proceed to Payment" class="btn btn-primary" />
 				</form>
 			</div>
 		</div>

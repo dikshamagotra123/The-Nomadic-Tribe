@@ -9,10 +9,10 @@ urlpatterns = [
     path('', home, name='home'),
     path('hotel-detail/<uid>/' , hotel_detail , name="hotel_detail"), 
     path('profile/<id>/',profile_page,name='profile'), 
-    # path('create-checkout-session/<hotel_name>/<hotel_price>/', CreateCheckoutSessionView, name='create-checkout-session'),
-    path('product-checkout-info/', ProductLandingPageView, name='landing-page'),
-    path('cancel/', CancelView, name='cancel'),
-    path('success/', SuccessView, name='success'),
+    path('pay_success',pay_success,name='pay_success'),
+	path('pay_cancel',pay_cancel,name='pay_cancel'),
+    path('checkout/', checkout, name='checkout'),
+    path('checkout_session/<hotel_name>/<hotel_price>/', checkout_session, name='checkout_session'),
 ]
 
 

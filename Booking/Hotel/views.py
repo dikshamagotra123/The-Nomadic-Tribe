@@ -5,9 +5,8 @@ from django.contrib import messages
 from django.http import HttpResponseRedirect, JsonResponse
 from .models import (Adventures, Hotel, HotelBooking)
 from django.db.models import Q
-from django.views import View
-from django.views.generic.base import TemplateView 
 from Booking.stripe_settings import *
+from django.urls import reverse
 
 def check_booking(start_date,end_date,hotels):
     
@@ -122,7 +121,7 @@ def hotel_detail(request,uid):
             #                             booking_type  = 'Pre Paid',
             #                             booking_price=int(price),
             #                             adventures_booked=adventure_list)
-            return redirect('/product-checkout-info/?hotel=' + selected_hotel.hotel_name + '&start_date=' + checkin + '&end_date=' + checkout + '&room_count=' + rooms + '&booking_price=' + price + '&adventures_booked='+str(adventure_list))
+            return redirect('/checkout/?hotel=' + selected_hotel.hotel_name + '&start_date=' + checkin + '&end_date=' + checkout + '&room_count=' + rooms + '&booking_price=' + price + '&adventures_booked='+str(adventure_list))
             # messages.success(request, 'Your booking has been saved')
             # return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
     
@@ -137,33 +136,46 @@ def profile_page(request,id):
 
 
 
-def SuccessView(request):
+def pay_success(request):
     return render(request,'success.html')
 
 
-def CancelView(request):
+def pay_cancel(request):
     return render(request,'cancel.html')
 
 
-def ProductLandingPageView(request):
-    if request.method == 'GET':
-        user = request.user.id
-        checkin = request.GET.get('start_date')
-        checkout= request.GET.get('end_date')
-        rooms = request.GET.get('room_count')
-        selected_hotel = request.GET.get('hotel')
-        price = request.GET.get('booking_price')
-        print(f"{price=}")
-        context = {
-            'user':user,
-            'checkin':checkin,
-            'checkout':checkout,
-            'rooms':rooms,
-            'price':price,
-            'selected_hotel':selected_hotel
-        }
-        context.update({
-            "STRIPE_PUBLIC_KEY": STRIPE_PUBLISHABLE_KEY
-        })
-        return render(request,"landing.html",context=context)
+def checkout(request):
+    selected_hotel = request.GET.get('hotel')
+    checkin = request.GET.get('start_date')
+    checkout = request.GET.get('end_date')
+    price = request.GET.get('booking_price')
+    context = {
+        'selected_hotel':selected_hotel,
+        'checkin':checkin,
+        'checkout':checkout,
+        'price':price,
+    }
+    return render(request, 'checkout.html',context)
 
+stripe.api_key = STRIPE_SECRET_KEY
+def checkout_session(request,hotel_name, hotel_price):
+    
+	session=stripe.checkout.Session.create(
+		payment_method_types=['card'],
+		line_items=[{
+	      'price_data': {
+	        'currency': 'cad',
+	        'product_data': {
+	          'name': hotel_name,
+	        },
+	        'unit_amount': int(hotel_price)*100,
+	      },
+	      'quantity': 1,
+	    }],
+	    mode='payment',
+
+	    success_url='http://127.0.0.1:8000/pay_success?session_id={CHECKOUT_SESSION_ID}',
+	    cancel_url='http://127.0.0.1:8000/pay_cancel',
+	    client_reference_id=hotel_name
+	)
+	return redirect(session.url, code=303)
