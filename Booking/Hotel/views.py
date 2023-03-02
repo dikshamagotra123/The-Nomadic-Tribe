@@ -6,7 +6,7 @@ from django.http import HttpResponseRedirect, JsonResponse
 from .models import (Adventures, Hotel, HotelBooking)
 from django.db.models import Q
 from Booking.stripe_settings import *
-from django.urls import reverse
+stripe.api_key = STRIPE_SECRET_KEY
 
 def check_booking(start_date,end_date,hotels):
     
@@ -115,13 +115,13 @@ def hotel_detail(request,uid):
             messages.warning(request, 'There are not enough rooms available in this hotel')
             return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
         else:
-            # HotelBooking.objects.create(hotel=selected_hotel , user = request.user , 
-            #                             start_date=checkin, end_date = checkout ,
-            #                             room_count=rooms, 
-            #                             booking_type  = 'Pre Paid',
-            #                             booking_price=int(price),
-            #                             adventures_booked=adventure_list)
-            return redirect('/checkout/?hotel=' + selected_hotel.hotel_name + '&start_date=' + checkin + '&end_date=' + checkout + '&room_count=' + rooms + '&booking_price=' + price + '&adventures_booked='+str(adventure_list))
+            HotelBooking.objects.create(hotel=selected_hotel , user = request.user , 
+                                        start_date=checkin, end_date = checkout ,
+                                        room_count=rooms, 
+                                        booking_type  = 'Pre Paid',
+                                        booking_price=int(price),
+                                        adventures_booked=adventure_list)
+            return redirect(f'/checkout_session/{selected_hotel.hotel_name}/{price}/')
             # messages.success(request, 'Your booking has been saved')
             # return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
     
@@ -134,9 +134,9 @@ def profile_page(request,id):
     context = {'user_obj':user_obj}
     return render(request,"Hotel/profile.html",context)
 
-
-
 def pay_success(request):
+    # session = stripe.checkout.Session.retrieve(request.args.get('session_id'))
+    # customer = stripe.Customer.retrieve(session.customer)
     return render(request,'success.html')
 
 
@@ -157,12 +157,16 @@ def checkout(request):
     }
     return render(request, 'checkout.html',context)
 
-stripe.api_key = STRIPE_SECRET_KEY
-def checkout_session(request,hotel_name, hotel_price):
+
+def checkout_session(request,hotel_name,hotel_price):
     
 	session=stripe.checkout.Session.create(
 		payment_method_types=['card'],
-		line_items=[{
+        metadata= {
+            'rooms':69
+        },
+		line_items=[
+            {
 	      'price_data': {
 	        'currency': 'cad',
 	        'product_data': {
