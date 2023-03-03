@@ -7,6 +7,8 @@ from .models import (Adventures, Hotel, HotelBooking)
 from django.db.models import Q
 from Booking.stripe_settings import *
 stripe.api_key = STRIPE_SECRET_KEY
+from django.http import HttpResponse
+from django.views.decorators.csrf import csrf_exempt
 
 def check_booking(start_date,end_date,hotels):
     
@@ -115,13 +117,7 @@ def hotel_detail(request,uid):
             messages.warning(request, 'There are not enough rooms available in this hotel')
             return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
         else:
-            HotelBooking.objects.create(hotel=selected_hotel , user = request.user , 
-                                        start_date=checkin, end_date = checkout ,
-                                        room_count=rooms, 
-                                        booking_type  = 'Pre Paid',
-                                        booking_price=int(price),
-                                        adventures_booked=adventure_list)
-            return redirect(f'/checkout_session/{selected_hotel.hotel_name}/{price}/')
+            return redirect(f'/checkout_session/{selected_hotel.hotel_name}/{price}/{request.user}/{checkin}/{checkout}/{rooms}/{adventure_list}')
             # messages.success(request, 'Your booking has been saved')
             # return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
     
@@ -131,12 +127,16 @@ def hotel_detail(request,uid):
 
 def profile_page(request,id):
     user_obj = User.objects.get(id=id)
-    context = {'user_obj':user_obj}
+    booking_objs = HotelBooking.objects.filter(user=user_obj)
+    context = {'user_obj':user_obj,'booking_obj': booking_objs}
+
     return render(request,"Hotel/profile.html",context)
 
 def pay_success(request):
     # session = stripe.checkout.Session.retrieve(request.args.get('session_id'))
+    session_id = request.GET.get('session_id')
     # customer = stripe.Customer.retrieve(session.customer)
+    line_items = stripe.checkout.Session.list_line_items(session_id, limit=1)
     return render(request,'success.html')
 
 
@@ -158,12 +158,17 @@ def checkout(request):
     return render(request, 'checkout.html',context)
 
 
-def checkout_session(request,hotel_name,hotel_price):
-    
+def checkout_session(request,hotel_name,hotel_price,user,checkin,checkout,rooms,adventure_list):
 	session=stripe.checkout.Session.create(
 		payment_method_types=['card'],
         metadata= {
-            'rooms':69
+            'hotel_name':hotel_name,
+            'price':int(hotel_price)*100,
+            'rooms':rooms,
+            'user':user,
+            'checkin':checkin,
+            'checkout':checkout,
+            'adventure_list':adventure_list,
         },
 		line_items=[
             {
@@ -183,3 +188,44 @@ def checkout_session(request,hotel_name,hotel_price):
 	    client_reference_id=hotel_name
 	)
 	return redirect(session.url, code=303)
+
+@csrf_exempt
+def stripe_webhook(request):
+
+    print('WEBHOOK!')
+    # You can find your endpoint's secret in your webhook settings
+    endpoint_secret = 'whsec_db71ef2c0d5ca4375c4f63f883530e16e84492cb75edbc26fea9fd54d7059377'
+
+    payload = request.body
+    sig_header = request.META['HTTP_STRIPE_SIGNATURE']
+    event = None
+
+    try:
+        event = stripe.Webhook.construct_event(
+            payload, sig_header, endpoint_secret
+        )
+    except ValueError as e:
+        # Invalid payload
+        return HttpResponse(status=400)
+    except stripe.error.SignatureVerificationError as e:
+        # Invalid signature
+        return HttpResponse(status=400)
+
+    # Handle the checkout.session.completed event
+    if event['type'] == 'checkout.session.completed':
+        session = event['data']['object']
+        line_items = stripe.checkout.Session.list_line_items(session['id'], limit=1)
+        # print(f"{session['metadata']=}")
+        metadata = session['metadata']
+        hotel = Hotel.objects.get(hotel_name=metadata['hotel_name'])
+        user = User.objects.get(username=metadata['user'])
+        hotel_booking_obj = HotelBooking.objects.create(hotel=hotel , user = user , 
+                                        start_date=metadata['checkin'], end_date = metadata['checkout'] ,
+                                        room_count=int(metadata['rooms']), 
+                                        booking_type  = 'Pre Paid',
+                                        booking_price=int(metadata['price'])/100,
+                                        adventures_booked=metadata['adventure_list'])
+        print(f'{hotel_booking_obj=}')
+
+
+    return HttpResponse(status=200)

@@ -1,12 +1,65 @@
-<!DOCTYPE html>
-<html lang="en">
-	<head>
-		<meta charset="UTF-8" />
-		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
-		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-		<title>Document</title>
-	</head>
-	<body>
-		user_obj It is {% now "Y-m-d" %}
-	</body>
-</html>
+{% extends "Hotel/base.html" %} {% block content %} {% load static %}
+<div class="profilCompont cm__myTripSideBar cm__myProfileTheme wd75" id="profilePageComponent0">
+	<div class="detalCrdHadr  ">
+		<div class="appendRight10">
+			<h3 class="font30 latoBold blackText">Profile</h3>
+			<p class="font18 darkGreyText appendTop10">Basic info, for a faster booking experience</p>
+		</div>
+		<div><button type="button" class="font16 latoBold blueText btn__dtailAdEdt"><span
+					class="myPrfilSprit myPrfilSprit__edtIcn noShrink appendRight5"></span>Edit</button></div>
+	</div>
+	<ul class="profilCompont__dtalLst">
+		<li class="profilCompont__dtalLstItm">
+			<div class="profilCompont__dtalLstItmContnt"><span
+					class="font16 darkGreyText profilCompont__detalkey">USERNAME</span><span
+					class="font18 blackText latoBold appendRight5">{{user_obj.username}}</span></div>
+		</li>
+		<li class="profilCompont__dtalLstItm">
+			<div class="profilCompont__dtalLstItmContnt"><span class="font16 darkGreyText profilCompont__detalkey">FIRST
+					NAME</span><span class="font18 blackText latoBold appendRight5">{{user_obj.first_name}}</span></div>
+		</li>
+		<li class="profilCompont__dtalLstItm">
+			<div class="profilCompont__dtalLstItmContnt"><span class="font16 darkGreyText profilCompont__detalkey">LAST
+					NAME</span><span class="font18 blackText latoBold appendRight5">{{user_obj.last_name}}</span></div>
+		</li>
+		{% if user_obj.email %}
+		<li class="profilCompont__dtalLstItm">
+			<div class="profilCompont__dtalLstItmContnt"><span class="font16 darkGreyText profilCompont__detalkey">EMAIL
+					ID</span><span class="font18 blackText latoBold appendRight5">{{user_obj.email}}</span></div>
+		</li>
+		{% endif %}
+	</ul>
+</div>
+<div class="profilCompont cm__myTripSideBar cm__myProfileTheme wd75" id="profilePageComponent0">
+	<div class="detalCrdHadr  ">
+		<div class="appendRight10">
+			<h3 class="font30 latoBold blackText">List of Bookings</h3>
+			<p class="font18 darkGreyText appendTop10">Hotels which you have booked</p>
+		</div>
+	</div>
+	<ul class="profilCompont__dtalLst">
+		{% for booking_obj in booking_objs  %}
+			<li class="profilCompont__dtalLstItm">
+				<div class="profilCompont__dtalLstItmContnt">
+					<!-- <span
+						class="font16 darkGreyText profilCompont__detalkey">USERNAME</span> -->
+						<span class="font30 blackText latoBold appendRight5">{{booking_obj}}</span>
+				</div>
+				<div class="details_style">
+					<span class="font16 darkGreyText profilCompont__detalkey"> <b>Checkin: </b> {{booking_obj.start_date}}</span>
+				</div>
+				<div class="details_style">
+					<span class="font16 darkGreyText profilCompont__detalkey"> <b>Checkout: </b> {{booking_obj.end_date}}</span>
+				</div>
+				<div class="details_style">
+					<span class="font16 darkGreyText profilCompont__detalkey"> <b>Rooms: </b> {{booking_obj.room_count}}</span>
+				</div>
+				<div class="details_style">
+					<span class="font16 darkGreyText profilCompont__detalkey"> <b>Price: </b> {{booking_obj.booking_price}}</span>
+				</div>
+			</li>
+		{% endfor %}
+	</ul>
+</div>
+	<!-- It is {% now "Y-m-d" %} -->
+{% endblock content %}
