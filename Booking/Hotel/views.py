@@ -9,6 +9,7 @@ from Booking.stripe_settings import *
 stripe.api_key = STRIPE_SECRET_KEY
 from django.http import HttpResponse
 from django.views.decorators.csrf import csrf_exempt
+from django.contrib.auth.decorators import login_required
 
 def check_booking(start_date,end_date,hotels):
     
@@ -125,10 +126,12 @@ def hotel_detail(request,uid):
         'hotel_booking_objs':hotel_booking_objs,
     })
 
+@login_required
 def profile_page(request,id):
     user_obj = User.objects.get(id=id)
     booking_objs = HotelBooking.objects.filter(user=user_obj)
-    context = {'user_obj':user_obj,'booking_obj': booking_objs}
+    context = {'user_obj':user_obj,'booking_objs': booking_objs}
+    print(f"{booking_objs=}")
 
     return render(request,"Hotel/profile.html",context)
 
@@ -142,20 +145,6 @@ def pay_success(request):
 
 def pay_cancel(request):
     return render(request,'cancel.html')
-
-
-def checkout(request):
-    selected_hotel = request.GET.get('hotel')
-    checkin = request.GET.get('start_date')
-    checkout = request.GET.get('end_date')
-    price = request.GET.get('booking_price')
-    context = {
-        'selected_hotel':selected_hotel,
-        'checkin':checkin,
-        'checkout':checkout,
-        'price':price,
-    }
-    return render(request, 'checkout.html',context)
 
 
 def checkout_session(request,hotel_name,hotel_price,user,checkin,checkout,rooms,adventure_list):

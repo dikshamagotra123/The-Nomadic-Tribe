@@ -1,65 +1,70 @@
 {% extends "Hotel/base.html" %} {% block content %} {% load static %}
-<div class="profilCompont cm__myTripSideBar cm__myProfileTheme wd75" id="profilePageComponent0">
-	<div class="detalCrdHadr  ">
-		<div class="appendRight10">
-			<h3 class="font30 latoBold blackText">Profile</h3>
-			<p class="font18 darkGreyText appendTop10">Basic info, for a faster booking experience</p>
+<div class="student-profile py-4 mt-7">
+	<div class="container">
+	  <div class="row">
+		<div class="col-lg-4">
+		  <div class="card shadow-sm">
+			<div class="card-header bg-transparent text-center">
+			  <img class="profile_img " src="https://placeimg.com/640/480/arch/any" alt="">
+			  <h3 class="text-col upper-case0">{{user_obj.first_name}}</h3>
+			</div>
+			<div class="card-body">
+			  <p class="mb-0"><strong class="pr-1">First Name:  </strong>{{user_obj.first_name}}</p>
+			  <p class="mb-0"><strong class="pr-1">Lats Name:  </strong>{{user_obj.last_name}}</p>
+			  <p class="mb-0"><strong class="pr-1">Username:</strong>  {{user_obj.username}}</p>
+			  {% if user_obj.email %}
+			  <p class="mb-0"><strong class="pr-1">Email:</strong>{{user_obj.email}}</p>
+			  {% endif %}
+			</div>
+		  </div>
 		</div>
-		<div><button type="button" class="font16 latoBold blueText btn__dtailAdEdt"><span
-					class="myPrfilSprit myPrfilSprit__edtIcn noShrink appendRight5"></span>Edit</button></div>
-	</div>
-	<ul class="profilCompont__dtalLst">
-		<li class="profilCompont__dtalLstItm">
-			<div class="profilCompont__dtalLstItmContnt"><span
-					class="font16 darkGreyText profilCompont__detalkey">USERNAME</span><span
-					class="font18 blackText latoBold appendRight5">{{user_obj.username}}</span></div>
-		</li>
-		<li class="profilCompont__dtalLstItm">
-			<div class="profilCompont__dtalLstItmContnt"><span class="font16 darkGreyText profilCompont__detalkey">FIRST
-					NAME</span><span class="font18 blackText latoBold appendRight5">{{user_obj.first_name}}</span></div>
-		</li>
-		<li class="profilCompont__dtalLstItm">
-			<div class="profilCompont__dtalLstItmContnt"><span class="font16 darkGreyText profilCompont__detalkey">LAST
-					NAME</span><span class="font18 blackText latoBold appendRight5">{{user_obj.last_name}}</span></div>
-		</li>
-		{% if user_obj.email %}
-		<li class="profilCompont__dtalLstItm">
-			<div class="profilCompont__dtalLstItmContnt"><span class="font16 darkGreyText profilCompont__detalkey">EMAIL
-					ID</span><span class="font18 blackText latoBold appendRight5">{{user_obj.email}}</span></div>
-		</li>
-		{% endif %}
-	</ul>
-</div>
-<div class="profilCompont cm__myTripSideBar cm__myProfileTheme wd75" id="profilePageComponent0">
-	<div class="detalCrdHadr  ">
-		<div class="appendRight10">
-			<h3 class="font30 latoBold blackText">List of Bookings</h3>
-			<p class="font18 darkGreyText appendTop10">Hotels which you have booked</p>
+		<div class="col-lg-8">
+		  <div class="card shadow-sm">
+			<div class="card-header bg-transparent border-0">
+			  <h3 class="mb-0 text-col"><i class="far fa-clone pr-1"></i>Booking Information</h3>
+			</div>
+			{% if booking_objs.count > 0  %}
+			{% for booking_obj in booking_objs  %}
+			<div class="card-body pt-0">
+			  <table class="table table-bordered">
+				<tr>
+				  <th width="30%">Hotel Name</th>
+				  <td width="2%">:</td>
+				  <td>{{booking_obj}}</td>
+				</tr>
+				<tr>
+				  <th width="30%">Checkin	</th>
+				  <td width="2%">:</td>
+				  <td>{{booking_obj.start_date}}</td>
+				</tr>
+				<tr>
+				  <th width="30%">Checkout</th>
+				  <td width="2%">:</td>
+				  <td>{{booking_obj.end_date}}</td>
+				</tr>
+				<tr>
+				  <th width="30%">Rooms</th>
+				  <td width="2%">:</td>
+				  <td>{{booking_obj.room_count}}</td>
+				</tr>
+				<tr>
+				  <th width="30%">Price</th>
+				  <td width="2%">:</td>
+				  <td>{{booking_obj.booking_price}}</td>
+				</tr>
+			  </table>
+			</div>
+			{% endfor %}
+			{% else %}
+			<div class="card-body pt-0">
+				<h3 class="mb-0 text-col"><i class="far fa-clone pr-1"></i>No Bookings</h3>
+			</div>
+			{% endif %}
+		  </div>
 		</div>
+	  </div>
 	</div>
-	<ul class="profilCompont__dtalLst">
-		{% for booking_obj in booking_objs  %}
-			<li class="profilCompont__dtalLstItm">
-				<div class="profilCompont__dtalLstItmContnt">
-					<!-- <span
-						class="font16 darkGreyText profilCompont__detalkey">USERNAME</span> -->
-						<span class="font30 blackText latoBold appendRight5">{{booking_obj}}</span>
-				</div>
-				<div class="details_style">
-					<span class="font16 darkGreyText profilCompont__detalkey"> <b>Checkin: </b> {{booking_obj.start_date}}</span>
-				</div>
-				<div class="details_style">
-					<span class="font16 darkGreyText profilCompont__detalkey"> <b>Checkout: </b> {{booking_obj.end_date}}</span>
-				</div>
-				<div class="details_style">
-					<span class="font16 darkGreyText profilCompont__detalkey"> <b>Rooms: </b> {{booking_obj.room_count}}</span>
-				</div>
-				<div class="details_style">
-					<span class="font16 darkGreyText profilCompont__detalkey"> <b>Price: </b> {{booking_obj.booking_price}}</span>
-				</div>
-			</li>
-		{% endfor %}
-	</ul>
-</div>
+  </div>
+
 	<!-- It is {% now "Y-m-d" %} -->
 {% endblock content %}
