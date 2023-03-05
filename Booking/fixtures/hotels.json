@@ -9,7 +9,7 @@
 			"description": "Taj Hotel by Tata",
 			"amenities": [1],
 			"adventures": [1, 2, 3],
-			"room_count": "200"
+			"room_count": "3"
 		}
 	},
 	{
@@ -22,7 +22,7 @@
 			"description": "Jab We Met Hotel",
 			"amenities": [1, 2],
 			"adventures": [1, 2],
-			"room_count": "20"
+			"room_count": "3"
 		}
 	},
 	{
@@ -35,7 +35,7 @@
 			"description": "Hotels by ITC",
 			"amenities": [1, 2, 5],
 			"adventures": [1, 2],
-			"room_count": "200"
+			"room_count": "2"
 		}
 	}
 ]
