@@ -5,7 +5,7 @@
 		"fields": {
 			"uid": 1,
 			"hotel_name": "Taj Hotel",
-			"hotel_price": "8000",
+			"hotel_price": "800",
 			"description": "Taj Hotel by Tata",
 			"amenities": [1],
 			"adventures": [1, 2, 3],
@@ -18,7 +18,7 @@
 		"fields": {
 			"uid": 2,
 			"hotel_name": "Hotel Decent",
-			"hotel_price": "2000",
+			"hotel_price": "200",
 			"description": "Jab We Met Hotel",
 			"amenities": [1, 2],
 			"adventures": [1, 2],
@@ -31,7 +31,7 @@
 		"fields": {
 			"uid": 3,
 			"hotel_name": "ITC Morya",
-			"hotel_price": "12000",
+			"hotel_price": "120",
 			"description": "Hotels by ITC",
 			"amenities": [1, 2, 5],
 			"adventures": [1, 2],
