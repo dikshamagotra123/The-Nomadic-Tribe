@@ -131,7 +131,17 @@ def profile_page(request,id):
 	user_obj = User.objects.get(id=id)
 	booking_objs = HotelBooking.objects.filter(user=user_obj)
 	context = {'user_obj':user_obj,'booking_objs': booking_objs}
-	print(f"{booking_objs=}")
+
+	if request.method == 'POST':
+		delete_booking = request.POST.get('delete')
+		# print(f"{delete_booking=}")
+
+		if delete_booking:
+			HotelBooking.objects.get(uid=delete_booking).delete()
+			messages.warning(request, 'Booking Deleted Successfully')
+			return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
+		
+	# print(f"{booking_objs=}")
 
 	return render(request,"Hotel/profile.html",context)
 
