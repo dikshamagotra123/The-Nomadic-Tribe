@@ -95,7 +95,8 @@ def hotel_detail(request,uid):
 		checkout= request.POST.get('checkout')
 		rooms = request.POST.get('rooms')
 		adventure_list = request.POST.getlist('adventures')
-		price = request.POST.get('hotel_price')
+		price = request.POST.get('price')
+		print(f"{price=}")
 		hotel = Hotel.objects.filter(uid=uid)
 
 		try:

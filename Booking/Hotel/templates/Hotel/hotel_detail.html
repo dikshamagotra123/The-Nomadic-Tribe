@@ -66,7 +66,7 @@
 						</div>
 						<div class="review-txt"><span>{{hotel_booking_obj.review}}</span></div>
 					</div>
-					<p>CAD {{hotel_booking_obj.hotel_price}}</p>
+					<p id="default_price">{{hotel_booking_obj.hotel_price}}</p>
 					<p>{{hotel_booking_obj.room_count}}</p>
 				</div>
 			</div>
@@ -118,7 +118,7 @@
 		<div class="col-sm-12 filter-card mar-top1 mb-3">
 			<h5>Book Hotel</h5>
 			{%include "Hotel/messages.html"%}
-			<form method="post" id="form">
+			<form method="post"  id="form">
 				{% csrf_token %}
 				<div class="row form-group">
 					<div class="row">
@@ -137,8 +137,6 @@
 							</p>
 						</div>
 					</div>
-					<input type="text" style="display: none;" name="hotel_price" id="hotel_price" class="form-control"
-						value="{{hotel_booking_obj.hotel_price}}" />
 					<div class="row">
 						<div class="col-md-6">
 							<label class="label-style" for="maxtopay">Rooms</label>
@@ -146,20 +144,20 @@
 								{% if hotel_booking_obj.room_count == 1 %}
 							<div style="display: flex;">
 								<input type="number" id="quantity" name="rooms" min="1"
-									max="{{hotel_booking_obj.room_count}}" value="{{hotel_booking_obj.room_count}}" />
+									max="{{hotel_booking_obj.room_count}}" value="1" />
 								<p class="zoom-in-out-box">1 Room Left</p>
 							</div>
 							{% else %}
 							<input type="number" id="quantity" name="rooms" min="1"
-								max="{{hotel_booking_obj.room_count}}" value="{{hotel_booking_obj.room_count}}" />
+								max="{{hotel_booking_obj.room_count}}" value="1" />
 							{% endif %}
 							</p>
 						</div>
 						<div class="col-md-6">
 							<label class="label-style" for="maxtopay">Price</label>
 							<p>
-								<input type="text" disabled name="price" id="price"
-									value="$ {{hotel_booking_obj.hotel_price}}" />
+								<input type="text" name="price" id="price"
+									value="{{hotel_booking_obj.hotel_price}}" />
 							</p>
 						</div>
 					</div>
