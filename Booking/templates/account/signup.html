@@ -12,7 +12,13 @@
 	<div class="col-md-6 offset-md-3">
 		<form method="POST" action="{% url 'account_signup' %}" class="needs-validation" >
 		{% csrf_token %}
-		 {{ form|crispy }} 
+		 {{ form|crispy }} {% if redirect_field_value %}
+			<input
+				type="hidden"
+				name="{{ redirect_field_name }}"
+				value="{{ redirect_field_value }}"
+			/>
+			{% endif %}
 			<div class="d-grid">
 			<button class="primaryAction mt-3 btn btn-dark" type="submit">
 				{% trans "Sign Up" %}
