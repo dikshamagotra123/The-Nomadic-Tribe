@@ -68,10 +68,10 @@ def home(request):
 			print(f"Sort-By: {hotels_objs=}")
 
 	if search:
-		print("\nI am in search\n")
+		print("\nI am in search\n") # Q objects is for oring the hotel_objs.
 		hotels_objs = hotels_objs.filter(
 			Q(hotel_name__icontains = search) |
-			Q(description__icontains = search) )
+			Q(description__icontains = search) ) # https://books.agiliq.com/projects/django-orm-cookbook/en/latest/query_relatedtool.html
 
 	if adventures:
 		print(f"\nI am in adventure {adventures}\n")
