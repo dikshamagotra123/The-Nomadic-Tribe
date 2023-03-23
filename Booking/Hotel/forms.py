@@ -1,5 +1,7 @@
 from django import forms
 from allauth.account.forms import SignupForm
+from django.contrib.auth.models import User
+
 from django.utils.translation import gettext_lazy as _
 
 class CustomSignupForm(SignupForm):
@@ -12,3 +14,8 @@ class CustomSignupForm(SignupForm):
         user.last_name = self.cleaned_data['last_name']
         user.display_name = self.cleaned_data['display_name']
         user.save()
+
+class profileForm(forms.ModelForm):
+    class Meta:
+        model = User
+        fields = ['first_name', 'last_name', 'email','username']

@@ -27,7 +27,6 @@
 		crossorigin="anonymous"></script>
 	<link rel="stylesheet" href="{% static 'css/home.css' %}">
 	<!-- <script type="text/JavaScript" src="{%  static 'js/home.js' %}"></script> -->
-
 </head>
 
 <body class="body-bg">
@@ -93,7 +92,25 @@
 			today = yyyy + "-" + mm + "-" + dd;
 			$("#checkin").attr("min", today);
 			$("#checkout").attr("min", today);
+			// $('#update_btn').click(function () {
+			// 	$('.update_btn').css('display', 'block');
+			// });
 		};
+		function toggle() {
+			if (document.getElementById("update_btn").className == "hide")
+				document.getElementById("update_btn").className = "show";
+			// document.getElementById("details_txt").className = "hide";
+			else
+				document.getElementById("update_btn").className = "hide";
+
+			if (document.getElementById("details_txt").className == "show")
+				document.getElementById("details_txt").className = "hide";
+			// document.getElementById("details_txt").className = "hide";
+			else
+				document.getElementById("details_txt").className = "show";
+		}
+
+
 
 	</script>
 </body>

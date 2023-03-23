@@ -1,4 +1,5 @@
 import stripe
+from .forms import profileForm
 from django.shortcuts import render , redirect
 from django.contrib.auth.models import User
 from django.contrib import messages
@@ -130,20 +131,27 @@ def hotel_detail(request,uid):
 @login_required
 def profile_page(request,id):
 	user_obj = User.objects.get(id=id)
+	form = profileForm()
 	booking_objs = HotelBooking.objects.filter(user=user_obj)
-	context = {'user_obj':user_obj,'booking_objs': booking_objs}
-
+	# pop_up = request.GET.get('pop_up')
 	if request.method == 'POST':
 		delete_booking = request.POST.get('delete')
+		update_user = request.POST.get('update')
 		# print(f"{delete_booking=}")
-
+		if update_user:
+			form = profileForm(data=request.POST, instance=request.user)
+			if form.is_valid():
+				form.save()
+				messages.warning(request, 'User Updated Successfully')
+				return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
 		if delete_booking:
 			HotelBooking.objects.get(uid=delete_booking).delete()
 			messages.warning(request, 'Booking Deleted Successfully')
 			return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
-		
-	# print(f"{booking_objs=}")
+	else:
+		form = profileForm(instance=request.user)
 
+	context = {'user_obj':user_obj,'booking_objs': booking_objs,'form':form}	
 	return render(request,"Hotel/profile.html",context)
 
 def pay_success(request):
