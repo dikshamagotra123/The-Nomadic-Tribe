@@ -1061,7 +1061,7 @@ overflow: hidden; */
 }
 
 .more-offers {
-    margin-top: 6% !important;
+    margin-top: 1% !important;
 }
 
 .scene {
@@ -1074,14 +1074,10 @@ overflow: hidden; */
     color: #ccc;
     cursor: pointer;
     font-family: "Roboto", sans-serif;
-    transition: all 0.85s cubic-bezier(0.17, 0.67, 0.14, 0.93);
+    /* transition: all 0.85s cubic-bezier(0.17, 0.67, 0.14, 0.93); */
     transform-style: preserve-3d;
-    transform-origin: 100% 50%;
+    /* transform-origin: 100% 50%; */
     height: 7em;
-}
-
-.cube:hover {
-    transform: rotateX(-90deg);
 }
 
 .side {
@@ -1097,7 +1093,7 @@ overflow: hidden; */
     font-size: 1.4em;
 }
 
-.top {
+/* .top {
     background: linear-gradient(to right, #22c1c3, #fdbb2d);
     color: #222229;
     transform: rotateX(90deg) translate3d(0, 0, 2em);
@@ -1106,13 +1102,13 @@ overflow: hidden; */
     padding: 24%;
     width: 15em;
     height: 5em;
-}
+} */
 
 .front {
     background: #222229;
     color: #fff;
     box-shadow: inset 0 0 0 5px #fff;
-    transform: translate3d(0, 0, 2em);
+    /* transform: translate3d(0, 0, 2em); */
     border-radius: 25px;
     padding: 24%;
     width: 15em;
@@ -1310,7 +1306,7 @@ div.topBotomBordersOut a:hover:after {
 
 .abtPptDtlsTags {
     display: flex;
-    margin-top: 20px;
+    /* margin-top: 20px; */
 }
 
 .abtPptDtlsTags__item {

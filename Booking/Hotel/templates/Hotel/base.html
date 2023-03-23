@@ -40,11 +40,11 @@
 						<a class="nav-link active" aria-current="page" href="/"><i class=""></i>Home</a>
 					</li>
 					<li class="nav-item rounded">
-						<a class="nav-link" href="#"><i class=""></i>About</a>
+						<a class="nav-link" href="{% url 'about'%}"><i class=""></i>We Are</a>
 					</li>
-					<li class="nav-item rounded">
+					<!-- <li class="nav-item rounded">
 						<a class="nav-link" href="#"><i class=""></i>Contact</a>
-					</li>
+					</li> -->
 					<li class="nav-item rounded">
 						<a class="nav-link" href="{% url 'profile' request.user.id %}">
 							Hi, {{request.user}}

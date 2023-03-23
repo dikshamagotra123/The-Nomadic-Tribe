@@ -1,0 +1,68 @@
+[
+  {
+    "pk": 1,
+    "model": "Hotel.HotelImage",
+    "fields": {
+      "uid": 1,
+      "hotel": 1,
+      "images": "hotels/Taj_Hotel.avif"
+    }
+  },{
+    "pk": 2,
+    "model": "Hotel.HotelImage",
+    "fields": {
+      "uid": 2,
+      "hotel": 2,
+      "images": "hotels/Hotel_Decent.webp"
+    }
+  },{
+    "pk": 3,
+    "model": "Hotel.HotelImage",
+    "fields": {
+      "uid": 3,
+      "hotel": 3,
+      "images": "hotels/ITC.png"
+    }
+  },{
+    "pk": 4,
+    "model": "Hotel.HotelImage",
+    "fields": {
+      "uid": 4,
+      "hotel": 4,
+      "images": "hotels/Hilton.jpg"
+    }
+  },{
+    "pk": 5,
+    "model": "Hotel.HotelImage",
+    "fields": {
+      "uid": 5,
+      "hotel": 5,
+      "images": "hotels/Grand-Hyatt-Dubai.webp"
+    }
+  },{
+    "pk": 6,
+    "model": "Hotel.HotelImage",
+    "fields": {
+      "uid": 6,
+      "hotel": 6,
+      "images": "hotels/sheraton-tokyo.jpg"
+    }
+  },{
+    "pk": 7,
+    "model": "Hotel.HotelImage",
+    "fields": {
+      "uid": 7,
+      "hotel": 7,
+      "images": "hotels/Ritz.jpg"
+    }
+  },{
+    "pk": 8,
+    "model": "Hotel.HotelImage",
+    "fields": {
+      "uid": 8,
+      "hotel": 8,
+      "images": "hotels/Four_Season_Paris.jpg"
+    }
+  }
+]
+ 

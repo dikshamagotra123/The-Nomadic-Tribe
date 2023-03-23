@@ -1,0 +1,212 @@
+{% extends "Hotel/base.html" %}
+
+{% block content %}
+
+{% load static %}
+<style>
+    #team i {
+        font-size: 26px;
+        color: #555;
+    }
+
+    #team p {
+        font-weight: 500;
+    }
+
+    #team .card {
+        border-radius: 0;
+        box-shadow: 5px 5px 15px #e74c3c;
+        transition: all 0.3s ease-in;
+        -webkit-transition: all 0.3s ease-in;
+        -moz-transition: all 0.3s ease-in;
+    }
+
+    #team .card:hover {
+        background: #e74c3c;
+        color: #fff;
+        border-radius: 5px;
+        border: none;
+        box-shadow: 5px 5px 10px #9e9e9e;
+    }
+
+    #team .card:hover h3,
+    #team .card:hover i {
+        color: #fff;
+    }
+
+    .team-len {
+        width: 80%;
+        margin: 0 auto;
+    }
+
+    .team-len2 {
+        width: 60%;
+        margin: 0 auto;
+    }
+
+    .h-100 {
+        height: 90% !important;
+    }
+</style>
+<div class="container my-3 py-5 text-center" id="team">
+    <div class="row mb-5">
+        <div class="col">
+            <h1>Our Team</h1>
+            <!-- <p class="my-3">
+                This team page has a quirky, vibrant energy that immediately catches your attention – a good
+                sign for a design company.
+            </p> -->
+        </div>
+    </div>
+    <div class="row team-len">
+        <div class="col-lg-4 col-md-6 pt-1">
+            <div class="card h-100">
+                <div class="card-body">
+                    <img class="img-fouild rounded w-75 mb-3"
+                        src="https://images.unsplash.com/photo-1554151228-14d9def656e4?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=333&q=80"
+                        alt="Sophie">
+                    <h3>Sophie Johnson</h3>
+                    <h5>Software Engineer</h5>
+                    
+                    <div class="d-flex flex-row justify-content-center">
+                        <div class="p-4">
+                            <a href="#">
+                                <i class="fab fa-facebook-f"></i>
+                            </a>
+                        </div>
+                        <div class="p-4">
+                            <a href="#">
+                                <i class="fab fa-twitter"></i>
+                            </a>
+                        </div>
+                        <div class="p-4">
+                            <a href="#">
+                                <i class="fab fa-instagram"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-lg-4 col-md-6 pt-1">
+            <div class="card h-100">
+                <div class="card-body">
+                    <img class="img-fouild rounded w-75 mb-3"
+                        src="https://images.unsplash.com/photo-1544005313-94ddf0286df2?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=334&q=80"
+                        alt="lucy">
+                    <h3>Lucy Sanchez</h3>
+                    <h5>FrontEnd Developer</h5>
+                    
+                    <div class="d-flex flex-row justify-content-center">
+                        <div class="p-4">
+                            <a href="#">
+                                <i class="fab fa-facebook-f"></i>
+                            </a>
+                        </div>
+                        <div class="p-4">
+                            <a href="#">
+                                <i class="fab fa-twitter"></i>
+                            </a>
+                        </div>
+                        <div class="p-4">
+                            <a href="#">
+                                <i class="fab fa-instagram"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-lg-4 col-md-6 pt-1">
+            <div class="card h-100">
+                <div class="card-body">
+                    <img class="img-fouild rounded w-75 mb-3"
+                        src="https://images.unsplash.com/photo-1592023031338-ee30ef94abbc?ixid=MXwxMjA3fDB8MHxzZWFyY2h8N3x8aHVtYW4lMjBtYW58ZW58MHx8MHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60"
+                        alt="Brad">
+                    <h3>Brad Smith</h3>
+                    <h5>Scrum Master</h5>
+                    
+                    <div class="d-flex flex-row justify-content-center">
+                        <div class="p-4">
+                            <a href="#">
+                                <i class="fab fa-facebook-f"></i>
+                            </a>
+                        </div>
+                        <div class="p-4">
+                            <a href="#">
+                                <i class="fab fa-twitter"></i>
+                            </a>
+                        </div>
+                        <div class="p-4">
+                            <a href="#">
+                                <i class="fab fa-instagram"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row team-len2">
+        <div class="col-lg-6 col-md-6 pt-1">
+            <div class="card h-100">
+                <div class="card-body">
+                    <img class="img-fouild rounded w-75 mb-3"
+                        src="https://images.unsplash.com/photo-1552058544-f2b08422138a?ixid=MXwxMjA3fDB8MHxzZWFyY2h8MTd8fGh1bWFufGVufDB8fDB8&ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60"
+                        alt="andres">
+                    <h3>Tom Rogers</h3>
+                    <h5>Software Engineer</h5>
+                    <div class="d-flex flex-row justify-content-center">
+                        <div class="p-4">
+                            <a href="#">
+                                <i class="fab fa-facebook-f"></i>
+                            </a>
+                        </div>
+                        <div class="p-4">
+                            <a href="#">
+                                <i class="fab fa-twitter"></i>
+                            </a>
+                        </div>
+                        <div class="p-4">
+                            <a href="#">
+                                <i class="fab fa-instagram"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-6 col-md-6 pt-1">
+            <div class="card h-100">
+                <div class="card-body">
+                    <img class="img-fouild rounded w-75 mb-3"
+                        src="https://images.unsplash.com/photo-1552058544-f2b08422138a?ixid=MXwxMjA3fDB8MHxzZWFyY2h8MTd8fGh1bWFufGVufDB8fDB8&ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60"
+                        alt="andres">
+                    <h3>Tom Rogers</h3>
+                    <h5>Software Engineer</h5>
+                    
+                    <div class="d-flex flex-row justify-content-center">
+                        <div class="p-4">
+                            <a href="#">
+                                <i class="fab fa-facebook-f"></i>
+                            </a>
+                        </div>
+                        <div class="p-4">
+                            <a href="#">
+                                <i class="fab fa-twitter"></i>
+                            </a>
+                        </div>
+                        <div class="p-4">
+                            <a href="#">
+                                <i class="fab fa-instagram"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock content %}

@@ -31,7 +31,7 @@ class Hotel(models.Model):
     adventures = models.ManyToManyField(Adventures) #Why Many Many ?
     amenities = models.ManyToManyField(Amenities)
     room_count = models.IntegerField(default=10)
-    review = models.IntegerField(default=7)
+    review = models.DecimalField(max_digits=2,decimal_places=1)
 
     def __str__(self) -> str:
         return self.hotel_name

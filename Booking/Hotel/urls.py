@@ -12,6 +12,8 @@ urlpatterns = [
 	path('pay_cancel',pay_cancel,name='pay_cancel'),
     path('checkout_session/<hotel_name>/<hotel_price>/<user>/<checkin>/<checkout>/<rooms>/<adventure_list>/', checkout_session, name='checkout_session'),
     path('stripe_webhook/',stripe_webhook,name="stripe_webhook"),
+    path('about/',about,name="about"),
+
 ]
 
 

@@ -1,41 +1,114 @@
 [
-	{
-		"model": "Hotel.Hotel",
-		"pk": 1,
-		"fields": {
-			"uid": 1,
-			"hotel_name": "Taj Hotel",
-			"hotel_price": "800",
-			"description": "Taj Hotel by Tata",
-			"amenities": [1],
-			"adventures": [1, 2, 3],
-			"room_count": "3"
-		}
-	},
-	{
-		"model": "Hotel.Hotel",
-		"pk": 2,
-		"fields": {
-			"uid": 2,
-			"hotel_name": "Hotel Decent",
-			"hotel_price": "200",
-			"description": "Jab We Met Hotel",
-			"amenities": [1, 2],
-			"adventures": [1, 2],
-			"room_count": "3"
-		}
-	},
-	{
-		"model": "Hotel.Hotel",
-		"pk": 3,
-		"fields": {
-			"uid": 3,
-			"hotel_name": "ITC Morya",
-			"hotel_price": "120",
-			"description": "Hotels by ITC",
-			"amenities": [1, 2, 5],
-			"adventures": [1, 2],
-			"room_count": "2"
-		}
-	}
+  {
+    "model": "Hotel.Hotel",
+    "pk": 1,
+    "fields": {
+      "uid": 1,
+      "hotel_name": "Taj Hotel",
+      "hotel_price": "800",
+      "description": "Taj Hotel by Tata in the heart of Mumbai. Taj offers you a privileged experience combining comfort and conviviality. Whether you are a backpacker, a solo traveler or with your family, our hotel with top-of-the-range service will meet all your expectations. More than just a hotel, Taj Hotel offers you a place to live and meet people.",
+      "amenities": [1,4],
+      "adventures": [1, 2, 3],
+      "room_count": "3",
+      "review": "8.5"
+    }
+  },
+  {
+    "model": "Hotel.Hotel",
+    "pk": 2,
+    "fields": {
+      "uid": 2,
+      "hotel_name": "Hotel Decent",
+      "hotel_price": "200",
+      "description": "Jab We Met Hotel in the city of Ratlaam. In a small traditional village called Ratlaam, which is one of the most beautiful and picturesque places in Madhya Pradesh, we chose to build a lovely high quality hotel which will give our guests the opportunity to experience a holiday with wonderful surroundings of nature and at the same time luxury and coziness.",
+      "amenities": [1, 2],
+      "adventures": [1, 2],
+      "room_count": "3",
+      "review": "7"
+    }
+  },
+  {
+    "model": "Hotel.Hotel",
+    "pk": 3,
+    "fields": {
+      "uid": 3,
+      "hotel_name": "ITC Morya",
+      "hotel_price": "120",
+      "description": "Hotels by ITC. Hotel & Spa is a family-friendly hotel that offers a wide range of accommodation types, from rooms to suites. All this in the peaceful surroundings of our beautiful gardens, will make your time at ITC an unforgettable holiday.",
+      "amenities": [1, 2, 5],
+      "adventures": [1, 2],
+      "room_count": "2",
+      "review": "7.5"
+    }
+  },
+  {
+    "model": "Hotel.Hotel",
+    "pk": 4,
+    "fields": {
+      "uid": 4,
+      "hotel_name": "Hilton New York",
+      "hotel_price": "250",
+      "description": "Luxury hotel in the heart of Manhattan. In the heart of New York, Hilton Hotel offers a comfortable stay in an elegant 19th century architecture. The hotel is close to Manhattan and Brooklyn. Location wise, (LN) and (NL) are within walking distance. Stay at our Hilton hotel and experience a special sojourn with quintessential American charm.",
+      "amenities": [2, 3, 4],
+      "adventures": [1, 3],
+      "room_count": "3",
+      "review": "9"
+    }
+  },
+  {
+    "model": "Hotel.Hotel",
+    "pk": 5,
+    "fields": {
+      "uid": 5,
+      "hotel_name": "Grand Hyatt Dubai",
+      "hotel_price": "180",
+      "description": "5-star hotel in the heart of Dubai. Our Hyatt is in a superb location with friendly and helpful staff. The hostel offers comfortable, clean rooms and fantastic access to Dubai's most famous sights and attractions.",
+      "amenities": [1, 4, 5],
+      "adventures": [2, 3],
+      "room_count": "4",
+      "review": "8.5"
+    }
+  },
+  {
+    "model": "Hotel.Hotel",
+    "pk": 6,
+    "fields": {
+      "uid": 6,
+      "hotel_name": "Sheraton Tokyo",
+      "hotel_price": "150",
+      "description": "Elegant hotel in the bustling city of Tokyo. Our hotel is easily accessible from the Tokyo motorway and it is designed to satisfy the needs of even the most demanding customers, be they holiday-makers or businesspeople.",
+      "amenities": [1, 3, 5],
+      "adventures": [1, 2, 3],
+      "room_count": "5",
+      "review": "7"
+    }
+  },
+  {
+    "model": "Hotel.Hotel",
+    "pk": 7,
+    "fields": {
+      "uid": 7,
+      "hotel_name": "Ritz Carlton Bali",
+      "hotel_price": "300",
+      "description": "Stunning beachfront resort in Bali. Unique 4-star Resort with 175 designed rooms. The hotel is located in the city centre within 10 minutes walk from the (LN) and the downtown shopping area. With great location, close to business centres and tourist attractions, this hotel will meet your expectations. Chill-out and bar area available for you to relax. Coffee and tea facilities in all rooms, Wi-Fi, fitness and Privilege lounge. Meals and drinks available 24/7.",
+      "amenities": [2, 3, 4],
+      "adventures": [3, 4],
+      "room_count": "6",
+      "review": "8"
+    }
+  },
+  {
+    "model": "Hotel.Hotel",
+    "pk": 8,
+    "fields": {
+      "uid": 8,
+      "hotel_name": "Four Seasons Paris",
+      "hotel_price": "400",
+      "description": "Luxurious hotel in the heart of Paris. Four Seasons welcomes you in a real cosmopolitan, pulsing milieu, at the same time offering peace and intimate retirement, just in the heart of the city centre. Timeless elegance tailored for the demands of our time; exceptional combination of magnificent architecture and divine cuisine, in perfect harmony. A Michelin-starred restaurant and a beautifully restored town palace joined forces for you!",
+      "amenities": [1, 2, 3, 4, 5],
+      "adventures": [1, 2, 3, 4],
+      "room_count": "7",
+      "review": "9"
+    }
+  }
 ]

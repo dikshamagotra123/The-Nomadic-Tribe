@@ -199,7 +199,6 @@ def checkout_session(request,hotel_name,hotel_price,user,checkin,checkout,rooms,
 
 @csrf_exempt
 def stripe_webhook(request):
-
 	print('WEBHOOK!')
 	# You can find your endpoint's secret in your webhook settings
 	endpoint_secret = 'whsec_db71ef2c0d5ca4375c4f63f883530e16e84492cb75edbc26fea9fd54d7059377'
@@ -237,3 +236,6 @@ def stripe_webhook(request):
 
 
 	return HttpResponse(status=200)
+
+def about(request):
+	return render(request,"Hotel/about.html")

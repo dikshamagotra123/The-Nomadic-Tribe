@@ -4,7 +4,7 @@
 		"pk": 1,
 		"fields": {
 			"uid": 1,
-			"adventure_name": "Adv 1"
+			"adventure_name": "Hiking"
 		}
 	},
 	{
@@ -12,7 +12,7 @@
 		"pk": 2,
 		"fields": {
 			"uid": 2,
-			"adventure_name": "Adv 2"
+			"adventure_name": "Snowboarding"
 		}
 	},
 	{
@@ -20,7 +20,7 @@
 		"pk": 3,
 		"fields": {
 			"uid": 3,
-			"adventure_name": "Adv 3"
+			"adventure_name": "Fishing"
 		}
 	},
 	{
@@ -28,7 +28,7 @@
 		"pk": 4,
 		"fields": {
 			"uid": 4,
-			"adventure_name": "Adv 4"
+			"adventure_name": "Wildlife watching"
 		}
 	},
 	{
@@ -36,7 +36,7 @@
 		"pk": 5,
 		"fields": {
 			"uid": 5,
-			"adventure_name": "Adv 5"
+			"adventure_name": "Museums"
 		}
 	},
 	{
@@ -44,7 +44,7 @@
 		"pk": 6,
 		"fields": {
 			"uid": 6,
-			"adventure_name": "Adv 6"
+			"adventure_name": "Historical sites"
 		}
 	},
 	{
@@ -52,7 +52,7 @@
 		"pk": 7,
 		"fields": {
 			"uid": 7,
-			"adventure_name": "Adv 7"
+			"adventure_name": "Kayaking"
 		}
 	}
 ]
