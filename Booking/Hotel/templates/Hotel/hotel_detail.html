@@ -79,11 +79,11 @@
 						</div>
 					</div>
 					<div class="review-txt"><span>Review: {{hotel_booking_obj.review}}</span></div>
-						<div class="review-txt"><span>Price: ${{hotel_booking_obj.hotel_price}}</span></div>
+						<div class="review-txt" id="default_price"><span>{{hotel_booking_obj.hotel_price}}</span></div>
 						<div class="review-txt"><span>Rooms: {{hotel_booking_obj.room_count}}</span></div>
 					
-					<!-- <p class="review-txt" id="default_price">Price: ${{hotel_booking_obj.hotel_price}}</p> -->
-					<!-- <p class="review-txt">Rooms: {{hotel_booking_obj.room_count}}</p> -->
+					<!-- <p class="review-txt" id="default_price">{{hotel_booking_obj.hotel_price}}</p>
+					<p class="review-txt">Rooms: {{hotel_booking_obj.room_count}}</p> -->
 				</div>
 			</div>
 			<div class="row">
@@ -172,7 +172,7 @@
 						<div class="col-md-6">
 							<label class="label-style" for="maxtopay">Price</label>
 							<p>
-								<input type="text" name="price" id="price"
+								<input disabled type="text" name="price" id="price"
 									value="{{hotel_booking_obj.hotel_price}}" />
 							</p>
 						</div>
