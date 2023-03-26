@@ -147,7 +147,7 @@ def profile_page(request,id):
 		if delete_booking:
 			HotelBooking.objects.get(uid=delete_booking).delete()
 			messages.warning(request, 'Booking Deleted Successfully')
-			return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
+			return HttpResponseRedirect(request.META.get('HTTP_REFERER')) #TODO: Check messages!
 	else:
 		form = profileForm(instance=request.user)
 
