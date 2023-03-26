@@ -78,12 +78,12 @@
 							<span class="star-icon">★</span>
 						</div>
 					</div>
-					<div class="review-txt"><span>Review: {{hotel_booking_obj.review}}</span></div>
-						<div class="review-txt" id="default_price"><span>{{hotel_booking_obj.hotel_price}}</span></div>
-						<div class="review-txt"><span>Rooms: {{hotel_booking_obj.room_count}}</span></div>
+					<div class="review-txt">Review: {{hotel_booking_obj.review}}</div>
+						<!-- <div class="review-txt" id="default_price">{{hotel_booking_obj.hotel_price}}</div>
+						<div class="review-txt">{{hotel_booking_obj.room_count}}</div> -->
 					
-					<!-- <p class="review-txt" id="default_price">{{hotel_booking_obj.hotel_price}}</p>
-					<p class="review-txt">Rooms: {{hotel_booking_obj.room_count}}</p> -->
+					<p class="review-txt" id="default_price">{{hotel_booking_obj.hotel_price}}</p>
+					<p class="review-txt">{{hotel_booking_obj.room_count}}</p>
 				</div>
 			</div>
 			<div class="row">
@@ -96,36 +96,7 @@
 								style="color:#040404">{{amenitie.amenity_name}}</span></li>{% endfor %}
 					</ul>
 				</div>
-				<!-- <div class="col-md-10 text-center mt-3 img-center">
-					<div class="amentities-svg">
-						<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128">
-							<path
-								d="M56.33 100a4 4 0 0 1-2.82-1.16L20.68 66.12a4 4 0 1 1 5.64-5.65l29.57 29.46 45.42-60.33a4 4 0 1 1 6.38 4.8l-48.17 64a4 4 0 0 1-2.91 1.6z">
-							</path>
-						</svg>
-					</div>
-					<p class="amentities-txt">
-						{%for amenitie in hotel_booking_obj.amenities.all %}
-						<b> {{amenitie.amenity_name}}</b> {% endfor %}
-					</p>
-				</div> -->
 			</div>
-			<!-- <div class="row">
-				<div class="col-md-2 text-center mt-3 img-center">
-					<p>Adventures:</p>
-				</div>
-				<div>
-					{%for adventure in hotel_booking_obj.hotel.adventures.all %}
-					<div class="text-center mt-3 img-center">
-						<p class="amentities-txt">
-							<b> {{adventure.adventure_name}}</b> 
-						</p>
-					</div>{% endfor %}
-				</div>
-			</div> -->
-			<!-- <div class="col-md-2 border-left text-center more-offers mt-5">
-		<div class="btn btn-success">View deal</div>
-	</div> -->
 		</div>
 
 	</div>
@@ -172,7 +143,7 @@
 						<div class="col-md-6">
 							<label class="label-style" for="maxtopay">Price</label>
 							<p>
-								<input disabled type="text" name="price" id="price"
+								<input type="text" name="price" id="price"
 									value="{{hotel_booking_obj.hotel_price}}" />
 							</p>
 						</div>
