@@ -47,7 +47,7 @@ def home(request):
 	
 	print(checkin,checkout)
 	alread_booked = None
-	hotel_booking_objs = None
+	# hotel_booking_objs = None
 
 	if checkin or checkout:
 		available_hotels_list ,booked_hotels_list = check_booking(checkin, checkout, hotels_objs)
@@ -55,10 +55,9 @@ def home(request):
 			messages.warning(request, 'Some hotels are booked on these days')
 		else:
 			hotels_objs = available_hotels_list
-			hotel_booking_objs = HotelBooking.objects.filter(start_date__lte = checkin,
-															end_date__gte=checkout,
-															)
-
+			# hotel_booking_objs = HotelBooking.objects.filter(start_date__lte = checkin,
+			# 												end_date__gte=checkout,
+			# 												)
 
 	if sort_by:
 		if sort_by == 'ASC':
@@ -85,7 +84,7 @@ def home(request):
 	print(f"Final : {hotels_objs=}")
 	# print(f"Hotel_booking : {hotel_booking_objs=}")
 
-	context = {'already_booked':alread_booked,'adventure_objs' : adventure_objs , 'hotels_objs' : hotels_objs , 'sort_by' : sort_by , 'search' : search , 'adventures' : adventures, 'checkin': checkin, 'checkout': checkout,'hotel_booking_objs':hotel_booking_objs}
+	context = {'already_booked':alread_booked,'adventure_objs' : adventure_objs , 'hotels_objs' : hotels_objs , 'sort_by' : sort_by , 'search' : search , 'adventures' : adventures, 'checkin': checkin, 'checkout': checkout}
 	return render(request , 'Hotel/home.html' ,context)
 
 def hotel_detail(request,uid):
