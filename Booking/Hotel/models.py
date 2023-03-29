@@ -2,8 +2,7 @@
 from django.contrib.auth.models import User
 from django.db import models
 import uuid
-from django.apps import AppConfig
-
+import datetime
 class Adventures(models.Model):
     uid = models.UUIDField(default=uuid.uuid4   , editable=False , primary_key=True)
     adventure_name = models.CharField(max_length=100)
@@ -25,14 +24,14 @@ class Amenities(models.Model):
         verbose_name_plural = "Amenities"
 
 class Hotel(models.Model):
-    uid = models.UUIDField(default=uuid.uuid4   , editable=False , primary_key=True)
+    uid = models.UUIDField(default=uuid.uuid4   , editable=False , primary_key=True) # Why UUID?
     hotel_name= models.CharField(max_length=100)
     hotel_price = models.IntegerField()
     description = models.TextField()
-    adventures = models.ManyToManyField(Adventures)
+    adventures = models.ManyToManyField(Adventures) #Why Many Many ?
     amenities = models.ManyToManyField(Amenities)
     room_count = models.IntegerField(default=10)
-    review = models.IntegerField(default=7)
+    review = models.DecimalField(max_digits=2,decimal_places=1)
 
     def __str__(self) -> str:
         return self.hotel_name
@@ -43,7 +42,7 @@ class HotelImage(models.Model):
     images = models.ImageField(upload_to="hotels")
 
 class HotelBooking(models.Model):
-    import datetime
+    
     uid = models.UUIDField(default=uuid.uuid4   , editable=False , primary_key=True)
     hotel= models.ForeignKey(Hotel  , related_name="hotel_bookings" , on_delete=models.CASCADE)
     user = models.ForeignKey(User, related_name="user_bookings" , on_delete=models.CASCADE)

@@ -1,5 +1,25 @@
 {% extends "Hotel/base.html" %} {% block content %} {% load static %}
-
+<style>
+	.review-txt {
+    align-items: center;
+    background: lightblue;
+    border-radius: 5px;
+    color: black;
+    /* padding: 1% 3% 1% 3%; */
+    margin-left: 11%;
+    font-size: 18px;
+    width: 34%;
+    margin-bottom: 2%;
+    margin-top: 3%;
+}
+.dsp-flx {
+	display: flex;
+}
+.bg-blue {
+	background: #0a223d;
+	color: white !important;
+}
+</style>
 <div class="container-fluid">
 	<div class="gallery">
 		<div class="gallery__item gallery__item--hor">
@@ -64,14 +84,18 @@
 							<span class="star-icon filled">★</span>
 							<span class="star-icon">★</span>
 						</div>
-						<div class="review-txt"><span>{{hotel_booking_obj.review}}</span></div>
 					</div>
-					<p>CAD {{hotel_booking_obj.hotel_price}}</p>
-					<p>{{hotel_booking_obj.room_count}}</p>
+					<div class="dsp-flx"><p class="review-txt bg-blue">Review</p><p class="review-txt">{{hotel_booking_obj.review}}</p></div>
+						<!-- <div class="review-txt" id="default_price">{{hotel_booking_obj.hotel_price}}</div>
+						<div class="review-txt">{{hotel_booking_obj.room_count}}</div> -->
+					
+					<div class="dsp-flx"><p class="review-txt bg-blue">Price(in CAD)</p>
+					<p class="review-txt" id="default_price">{{hotel_booking_obj.hotel_price}}</p></div>
+					<div class="dsp-flx"><p class="review-txt bg-blue">Rooms</p><p class="review-txt">{{hotel_booking_obj.room_count}}</p></div>
 				</div>
 			</div>
 			<div class="row">
-				<div class=" text-center mt-3 img-center">
+				<div class=" text-center img-center">
 					<ul class="abtPptDtlsTags">
 						{%for amenitie in hotel_booking_obj.amenities.all %}
 						<li class="abtPptDtlsTags__item" style="border-color:#C8E6FE;background-color:#EDF6FF"><img
@@ -80,36 +104,7 @@
 								style="color:#040404">{{amenitie.amenity_name}}</span></li>{% endfor %}
 					</ul>
 				</div>
-				<!-- <div class="col-md-10 text-center mt-3 img-center">
-					<div class="amentities-svg">
-						<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128">
-							<path
-								d="M56.33 100a4 4 0 0 1-2.82-1.16L20.68 66.12a4 4 0 1 1 5.64-5.65l29.57 29.46 45.42-60.33a4 4 0 1 1 6.38 4.8l-48.17 64a4 4 0 0 1-2.91 1.6z">
-							</path>
-						</svg>
-					</div>
-					<p class="amentities-txt">
-						{%for amenitie in hotel_booking_obj.amenities.all %}
-						<b> {{amenitie.amenity_name}}</b> {% endfor %}
-					</p>
-				</div> -->
 			</div>
-			<!-- <div class="row">
-				<div class="col-md-2 text-center mt-3 img-center">
-					<p>Adventures:</p>
-				</div>
-				<div>
-					{%for adventure in hotel_booking_obj.hotel.adventures.all %}
-					<div class="text-center mt-3 img-center">
-						<p class="amentities-txt">
-							<b> {{adventure.adventure_name}}</b> 
-						</p>
-					</div>{% endfor %}
-				</div>
-			</div> -->
-			<!-- <div class="col-md-2 border-left text-center more-offers mt-5">
-		<div class="btn btn-success">View deal</div>
-	</div> -->
 		</div>
 
 	</div>
@@ -118,7 +113,7 @@
 		<div class="col-sm-12 filter-card mar-top1 mb-3">
 			<h5>Book Hotel</h5>
 			{%include "Hotel/messages.html"%}
-			<form method="post" id="form">
+			<form method="post"  id="form">
 				{% csrf_token %}
 				<div class="row form-group">
 					<div class="row">
@@ -137,8 +132,6 @@
 							</p>
 						</div>
 					</div>
-					<input type="text" style="display: none;" name="hotel_price" id="hotel_price" class="form-control"
-						value="{{hotel_booking_obj.hotel_price}}" />
 					<div class="row">
 						<div class="col-md-6">
 							<label class="label-style" for="maxtopay">Rooms</label>
@@ -146,20 +139,20 @@
 								{% if hotel_booking_obj.room_count == 1 %}
 							<div style="display: flex;">
 								<input type="number" id="quantity" name="rooms" min="1"
-									max="{{hotel_booking_obj.room_count}}" value="{{hotel_booking_obj.room_count}}" />
+									max="{{hotel_booking_obj.room_count}}" value="1" />
 								<p class="zoom-in-out-box">1 Room Left</p>
 							</div>
 							{% else %}
 							<input type="number" id="quantity" name="rooms" min="1"
-								max="{{hotel_booking_obj.room_count}}" value="{{hotel_booking_obj.room_count}}" />
+								max="{{hotel_booking_obj.room_count}}" value="1" />
 							{% endif %}
 							</p>
 						</div>
 						<div class="col-md-6">
 							<label class="label-style" for="maxtopay">Price</label>
 							<p>
-								<input type="text" disabled name="price" id="price"
-									value="$ {{hotel_booking_obj.hotel_price}}" />
+								<input type="text" name="price" id="price"
+									value="{{hotel_booking_obj.hotel_price}}" />
 							</p>
 						</div>
 					</div>
@@ -177,7 +170,7 @@
 									<input type="checkbox" name="adventures" value="{{adventure.adventure_name}}"
 										id="optionOne" />
 									<label
-										for="optionOne">{{adventure.adventure_name}},{{adventure.adventure_price}}</label>
+										for="optionOne">{{adventure.adventure_name}}</label>
 								</div>{% endfor %}
 							</div>
 						</div>

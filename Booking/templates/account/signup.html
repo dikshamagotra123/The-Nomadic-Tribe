@@ -10,13 +10,9 @@
 </div>
 <div class="row">
 	<div class="col-md-6 offset-md-3">
-		<form
-			method="POST"
-			action="{% url 'account_signup' %}"
-			class="needs-validation"
-			novalidate
-		>
-			{% csrf_token %} {{ form|crispy }} {% if redirect_field_value %}
+		<form method="POST" action="{% url 'account_signup' %}" class="needs-validation" >
+		{% csrf_token %}
+		 {{ form|crispy }} {% if redirect_field_value %}
 			<input
 				type="hidden"
 				name="{{ redirect_field_name }}"
@@ -24,9 +20,9 @@
 			/>
 			{% endif %}
 			<div class="d-grid">
-				<button class="primaryAction mt-3 btn btn-dark" type="submit">
-					{% trans "Sign Up" %}
-				</button>
+			<button class="primaryAction mt-3 btn btn-dark" type="submit">
+				{% trans "Sign Up" %}
+			</button>
 				<br />
 			</div>
 		</form>

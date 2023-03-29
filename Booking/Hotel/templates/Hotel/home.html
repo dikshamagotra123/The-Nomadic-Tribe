@@ -3,15 +3,27 @@
 {%  block content %}
 
 {% load static %}
-
+<style>
+    .cube:hover {
+		transform: none !important;
+	}
+</style>
 <!--Full-Screen Splash Image with Flexbox center text-->
 <div id="splashImage" class="container-fluid">
     <div class="center-logo">
         <h1 class="title-sec typing-demo">The Nomadic Tribe</h1>
     </div>
-</div> <!-- End of full Screen Splash screen -->
+</div> 
+<!-- End of full Screen Splash screen -->
 
-<div class="container-fluid">
+<div class="container-fluid" id="test">
+    {% if messages %}
+		<ul class="messages">
+			{% for message in messages %}
+			<li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+			{% endfor %}
+		</ul>
+		{% endif %}
     <div class="row">
         <div class="col-lg-3">
             <div class="row my-3">
@@ -19,7 +31,7 @@
             <div class="row mt-2 justify-content-between">
                 <div class="filter-card">
                     <h5>Filter</h5>
-                    <form action="#">
+                    <form action="#test">
                         <div class="row form-group">
                             <div class="col-md-12">
                                 <label for="mintopay">Check in</label>
@@ -46,7 +58,7 @@
         </div>
 
         <div class="col-lg-9 mb-5">
-            <form>
+            <form method="GET" action="#test">
             <div class="row filter-bg">
                 <div class="col-md-3">
                 <div class="form-inline filter-form">
@@ -104,20 +116,20 @@
                 <div class="col-md-3 mt-2">
                     <div class="scene">
                         <div class="cube">
-                          <span class="side top">{{hotels_obj.review}}</span>
-                          <span class="side front">Reviews</span>
+                          <!-- <span class="side top"></span> -->
+                          <span class="side front">Reviews: {{hotels_obj.review}}</span>
                         </div>
                     </div>
                     <div class="scene">
                         <div class="cube">
-                          <span class="side top">$ {{hotels_obj.hotel_price}}</span>
-                          <span class="side front">Price</span>
+                          <!-- <span class="side top">$ {{hotels_obj.hotel_price}}</span> -->
+                          <span class="side front">Price: {{hotels_obj.hotel_price}}</span>
                         </div>
                     </div>
                     <div class="scene">
                         <div class="cube">
-                          <span class="side top">{{hotels_obj.room_count}}</span>
-                          <span class="side front">Rooms</span>
+                          <!-- <span class="side top">{{hotels_obj.room_count}}</span> -->
+                          <span class="side front">Rooms: {{hotels_obj.room_count}}</span>
                         </div>
                     </div>
                     
@@ -133,6 +145,17 @@
     </div>
 
 </div>
+<!-- <script>
+      function setDates() {
+        const today = new Date();
+        const tomorrow = new Date(today);
+        tomorrow.setDate(tomorrow.getDate() + 1);
+        document.getElementById("checkin").value = today.toISOString().substr(0, 10);
+        document.getElementById("checkout").value = tomorrow.toISOString().substr(0, 10);
+      }
+
+      setDates();
+    </script> -->
 <!-- End of container -->
 
 {% endblock content %}

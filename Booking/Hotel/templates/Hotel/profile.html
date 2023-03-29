@@ -1,12 +1,115 @@
-<!DOCTYPE html>
-<html lang="en">
-	<head>
-		<meta charset="UTF-8" />
-		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
-		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-		<title>Document</title>
-	</head>
-	<body>
-		user_obj It is {% now "Y-m-d" %}
-	</body>
-</html>
+{% extends "Hotel/base.html" %} {% block content %} {% load static %}
+<style>
+	.show {
+		display: block;
+	}
+
+
+	.hide {
+		display: none;
+	}
+</style>
+<div class="student-profile py-4 mt-7">
+	<div class="container">
+		{% if messages %}
+		<ul class="messages">
+			{% for message in messages %}
+			<li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+			{% endfor %}
+		</ul>
+		{% endif %}
+		<form method="post" id="form">
+			{% csrf_token %}
+			<div class="row">
+				<div class="col-lg-4">
+					<div class="card shadow-sm">
+						<div class="card-header bg-transparent text-center">
+							<img class="profile_img " src="/static/images/user_profile.webp" alt="">
+							<h3 class="text-col upper-case0">{{user_obj.first_name}}</h3>
+						</div>
+						<div class="show" id="details_txt">
+							<div class="card-body">
+
+								{% if user_obj.first_name %}
+								<p class="mb-0"><strong class="pr-1">First Name: </strong>{{user_obj.first_name}}</p>
+								{% endif %}
+								{% if user_obj.last_name %}
+								<p class="mb-0"><strong class="pr-1">Lats Name: </strong>{{user_obj.last_name}}</p>
+								{% endif %}
+								<p class="mb-0"><strong class="pr-1">Username:</strong> {{user_obj.username}}</p>
+								{% if user_obj.email %}
+								<p class="mb-0"><strong class="pr-1">Email: </strong> {{user_obj.email}}</p>
+								{% endif %}
+
+								<a class="btn btn-success btn-block" style="margin-left: 25%;" onclick=toggle()
+									href="#update_btn"> Update
+								</a>
+							</div>
+						</div>
+					</div>
+					<div class="hide" id="update_btn">
+						<div class="update_btn  card shadow-sm" style="padding: 6%;">
+							{{form.as_p}}</div>
+						<input class="btn btn-success btn-block" style="margin-left: 25%;" type="submit" name="update"
+							value="Update">
+					</div>
+
+				</div>
+				<div class="col-lg-8">
+					<div class="card shadow-sm">
+						<div class="card-header bg-transparent border-0">
+							<h3 class="mb-0 text-col"><i class="far fa-clone pr-1"></i>Booking Information</h3>
+						</div>
+						{% if booking_objs.count > 0 %}
+						{% for booking_obj in booking_objs %}
+						<div class="card-body pt-0">
+							<table class="table table-bordered">
+								<tr>
+									<th width="30%">Hotel Name</th>
+									<td width="2%">:</td>
+									<td>{{booking_obj}}</td>
+								</tr>
+								<tr>
+									<th width="30%">Checkin </th>
+									<td width="2%">:</td>
+									<td>{{booking_obj.start_date}}</td>
+								</tr>
+								<tr>
+									<th width="30%">Checkout</th>
+									<td width="2%">:</td>
+									<td>{{booking_obj.end_date}}</td>
+								</tr>
+								<tr>
+									<th width="30%">Rooms</th>
+									<td width="2%">:</td>
+									<td>{{booking_obj.room_count}}</td>
+								</tr>
+								<tr>
+									<th width="30%">Price</th>
+									<td width="2%">:</td>
+									<td>{{booking_obj.booking_price}}</td>
+								</tr>
+							</table>
+							<div class=" ">
+								<div class="" style="justify-content: center; display: flex">
+									<button class="btn btn-success btn-block"
+										onclick="return confirm('Are you sure, you want to Delete?')" name="delete"
+										value="{{booking_obj.uid}}">Delete</button>
+								</div>
+							</div>
+						</div>
+						{% endfor %}
+						{% else %}
+						<div class="card-body pt-0">
+							<h3 class="mb-0 text-col"><i class="far fa-clone pr-1"></i>No Bookings</h3>
+						</div>
+						{% endif %}
+					</div>
+				</div>
+			</div>
+		</form>
+	</div>
+</div>
+
+<!-- It is {% now "Y-m-d" %} -->
+{% endblock content %}
