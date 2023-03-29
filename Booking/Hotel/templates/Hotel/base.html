@@ -116,22 +116,23 @@
 					}
 					$("#price").val(get_price(no_of_nights, no_of_rooms, price))
 				}
-
-				var today = new Date()
-				var dd = String(today.getDate()).padStart(2, "0")
-				var mm = String(today.getMonth() + 1).padStart(2, "0")
-				var yyyy = today.getFullYear()
-				var nextDay = String(today.getDate() + 1).padStart(2, "0")
-				// var final_dd = nextDay.setDate(day.getDate() + 1)
-
-				today = yyyy + "-" + mm + "-" + dd
-				today2 = yyyy + "-" + mm + "-" + nextDay
-				$("#checkin").attr("min", today)
-				$("#checkout").attr("min", today2)
-				// $('#update_btn').click(function () {
-				// 	$('.update_btn').css('display', 'block');
-				// });
 			}
+			function setDates() {
+				const today = new Date()
+				const tomorrow = new Date(today)
+				tomorrow.setDate(tomorrow.getDate() + 1)
+				const todayStr = today.toISOString().substr(0, 10)
+				const tomorrowStr = tomorrow.toISOString().substr(0, 10)
+				document.getElementById("checkin").value = todayStr
+				document.getElementById("checkin").setAttribute("min", todayStr)
+				document.getElementById("checkout").value = tomorrowStr
+				document
+					.getElementById("checkout")
+					.setAttribute("min", tomorrowStr)
+			}
+
+			setDates()
+
 			function toggle() {
 				if (document.getElementById("update_btn").className == "hide")
 					document.getElementById("update_btn").className = "show"

@@ -145,6 +145,17 @@
     </div>
 
 </div>
+<!-- <script>
+      function setDates() {
+        const today = new Date();
+        const tomorrow = new Date(today);
+        tomorrow.setDate(tomorrow.getDate() + 1);
+        document.getElementById("checkin").value = today.toISOString().substr(0, 10);
+        document.getElementById("checkout").value = tomorrow.toISOString().substr(0, 10);
+      }
+
+      setDates();
+    </script> -->
 <!-- End of container -->
 
 {% endblock content %}

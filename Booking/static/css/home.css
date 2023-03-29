@@ -18,9 +18,9 @@
 	overflow: hidden;
 	text-overflow: ellipsis;
 	white-space: nowrap;
-	max-height: 18px;
+	max-height: 25px;
 	outline: none;
-	font-size: 15px;
+	font-size: 18px;
 }
 
 .mstogglebtn {
@@ -1127,7 +1127,7 @@ div.topBotomBordersOut a:after {
 
 .star-icon {
 	color: #ccc;
-	font-size: 24px;
+	font-size: 32px;
 	vertical-align: middle;
 }
 
@@ -1148,7 +1148,7 @@ div.topBotomBordersOut a:after {
 .star-rating {
 	display: flex;
 	justify-content: space-evenly;
-	margin-left: 20%;
+	margin-left: 0%;
 }
 
 div.topBotomBordersOut a:before {
