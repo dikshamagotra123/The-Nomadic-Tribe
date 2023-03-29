@@ -164,7 +164,7 @@ def pay_success(request):
 def pay_cancel(request):
 	return render(request,'cancel.html')
 
-
+@login_required
 def checkout_session(request,hotel_name,hotel_price,user,checkin,checkout,rooms,adventure_list):
 	user = User.objects.get(username=user)
 	session=stripe.checkout.Session.create(
